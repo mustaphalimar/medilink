@@ -1,9 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { Routes, Route } from "react-router-dom";
+import PrivateLayout from "./Layout/privateLayout";
 
 function App() {
   return (
-    <div className="flex items-center justify-center h-[100vh] w-full">
-      <Button>Click me</Button>
+    <div>
+      <Routes>
+        <Route path="/" element={<PrivateLayout />}>
+          <Route path="about" element={<>This is about</>} />
+          <Route path="contact" element={<>This is contact</>} />
+        </Route>
+      </Routes>
     </div>
   );
 }

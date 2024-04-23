@@ -1,13 +1,15 @@
 import Sidebar from "@/components/ui/sidebar";
+import TopBar from "@/components/ui/topbar";
 import { Outlet } from "react-router-dom";
 
 const PrivateLayout = () => {
   return (
     <div className="flex ">
-      <div className="min-w-[250px]">
+      <div className="max-w-[280px]">
         <Sidebar />
       </div>
-      <div className="w-full bg-gray-100">
+      <div className="w-full bg-gray-50 min-h-[100vh] p-4 px-10 space-y-10">
+        <TopBar />
         <Outlet />
       </div>
     </div>

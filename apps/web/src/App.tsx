@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateLayout from "./Layout/privateLayout";
 import NotFoundPage from "./screens/notFoundPage";
 import OverviewScreen from "./screens/OverviewScreen";
+import PatientsScreen from "./screens/patients/PatientsScreen";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<PrivateLayout />}>
           <Route path="/" element={<OverviewScreen />} />
-          <Route path="patients" element={<>This is patients</>} />
+          <Route path="patients" element={<PatientsScreen />} />
           <Route
             path="appointements"
             element={<>This is appointements page</>}

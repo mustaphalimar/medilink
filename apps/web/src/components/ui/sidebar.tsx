@@ -1,6 +1,6 @@
 import { TypographyH1 } from "@/Typography/TypographyH1";
-import { Calendar, ChevronLeft, ChevronRight, Home, Users } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { Calendar, Home, UserRoundCog, Users } from "lucide-react";
+import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 interface navLinkProps {
@@ -21,17 +21,13 @@ const SideLink = ({ to, children }: navLinkProps) => {
   );
 };
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+interface SideBarTypes {
+  isOpen: boolean;
+}
 
+const Sidebar = ({ isOpen }: SideBarTypes) => {
   return (
     <aside className={`w-full bg-white px-4 py-6 relative`}>
-      <div
-        className="absolute -right-2 top-5 bg-black text-white rounded-full cursor-pointer"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? <ChevronLeft /> : <ChevronRight />}
-      </div>
       {isOpen ? (
         <div className="mx-4">
           <TypographyH1>MedLink.</TypographyH1>
@@ -49,6 +45,9 @@ const Sidebar = () => {
         </SideLink>
         <SideLink to="/appointements">
           <Calendar /> {isOpen && <span>Appointements</span>}
+        </SideLink>
+        <SideLink to="/admins">
+          <UserRoundCog /> {isOpen && <span>Admins</span>}
         </SideLink>
       </nav>
     </aside>

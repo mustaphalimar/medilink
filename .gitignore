@@ -20,6 +20,7 @@ npm-debug.*
 web-build/
 cache/
 
+
 # React Native
 
 # OSX
@@ -63,6 +64,7 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+pnpm-lock.yaml
 
 # fastlane
 #

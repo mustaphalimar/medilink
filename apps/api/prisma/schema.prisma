@@ -14,8 +14,49 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String?
-  password String
+  id         String      @id @default(uuid())
+  email      String      @unique
+  name       String?
+  password   String
+  role       Role        @default(PATIENT)
+  superAdmin SuperAdmin?
+  admin      Admin?
+  patient    Patient?
+  doctor     Doctor?
+  userId     String
+}
+
+model SuperAdmin {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model Doctor {
+  id      String  @id @default(uuid())
+  user    User    @relation(fields: [userId], references: [id])
+  userId  String  @unique
+  admins  Admin[]
+  adminId String
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+  doctorId String
+}
+
+model Patient {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+enum Role {
+  SUPER_ADMIN
+  DOCTOR
+  ADMIN
+  PATIENT
 }

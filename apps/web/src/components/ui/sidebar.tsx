@@ -1,5 +1,12 @@
 import { TypographyH1 } from "@/Typography/TypographyH1";
-import { Calendar, Home, UserRoundCog, Users } from "lucide-react";
+import {
+  Calendar,
+  CircleUser,
+  FileStack,
+  Home,
+  UserRoundCog,
+  Users,
+} from "lucide-react";
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -33,7 +40,9 @@ const Sidebar = ({ isOpen }: SideBarTypes) => {
           <TypographyH1>MedLink.</TypographyH1>
         </div>
       ) : (
-        <TypographyH1>.</TypographyH1>
+        <div className="invisible">
+          <TypographyH1>.</TypographyH1>
+        </div>
       )}
 
       <nav className="text-black flex flex-col space-y-3 mt-5">
@@ -48,6 +57,12 @@ const Sidebar = ({ isOpen }: SideBarTypes) => {
         </SideLink>
         <SideLink to="/admins">
           <UserRoundCog /> {isOpen && <span>Admins</span>}
+        </SideLink>
+        <SideLink to="/requests">
+          <FileStack /> {isOpen && <span>Requests</span>}
+        </SideLink>
+        <SideLink to="/myprofile">
+          <CircleUser /> {isOpen && <span>My Profile</span>}
         </SideLink>
       </nav>
     </aside>

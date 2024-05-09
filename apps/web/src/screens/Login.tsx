@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 
 const Login = () => {
   return (
-    <div className="p-6 lg:p-0 h-[100vh] w-full bg-gray-100 mx-auto flex items-center justify-center">
+    <div className="p-6 lg:p-0 h-[100vh] w-full bg-gray-100 mx-auto flex items-center justify-center ">
       <div className=" flex items-center justify-center rounded-lg bg-white overflow-hidden ">
         <div className="hidden lg:block max-w-[500px]  min-h-0 overflow-hidden p-10 ">
           <img src="/loginImg.jpg" className="rounded-lg w-full h-full" />

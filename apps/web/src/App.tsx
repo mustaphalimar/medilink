@@ -6,6 +6,8 @@ import PatientsScreen from "./screens/patients/PatientsScreen";
 import AppointementsScreen from "./screens/appointements";
 import AdminsScreen from "./screens/admins/AdminsScreen";
 import Login from "./screens/Login";
+import RequestsScreen from "./screens/requests/RequestsScreen";
+import ProfileScreen from "./screens/profile/ProfileScreen";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="patients" element={<PatientsScreen />} />
           <Route path="appointements" element={<AppointementsScreen />} />
           <Route path="admins" element={<AdminsScreen />} />
+          <Route path="requests" element={<RequestsScreen />} />
+          <Route path="myprofile" element={<ProfileScreen />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

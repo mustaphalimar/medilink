@@ -23,7 +23,6 @@ model User {
   admin      Admin?
   patient    Patient?
   doctor     Doctor?
-  userId     String
 }
 
 model SuperAdmin {
@@ -33,11 +32,13 @@ model SuperAdmin {
 }
 
 model Doctor {
-  id      String  @id @default(uuid())
-  user    User    @relation(fields: [userId], references: [id])
-  userId  String  @unique
-  admins  Admin[]
-  adminId String
+  id                 String              @id @default(uuid())
+  user               User                @relation(fields: [userId], references: [id])
+  userId             String              @unique
+  admins             Admin[]
+  patients           Patient[]
+  PatientsAndDoctors PatientsAndDoctors?
+  Appointment        Appointment[]
 }
 
 model Admin {
@@ -49,9 +50,24 @@ model Admin {
 }
 
 model Patient {
-  id     String @id @default(uuid())
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  id                 String              @id @default(uuid())
+  user               User                @relation(fields: [userId], references: [id])
+  userId             String              @unique
+  doctors            Doctor[]
+  PatientsAndDoctors PatientsAndDoctors?
+  Appointment        Appointment[]
+  gendre             String
+  age                Int
+  weight             Int
+  height             Int
+  MedicalFile        MedicalFile?
+}
+
+model PatientsAndDoctors {
+  doctor    Doctor  @relation(fields: [doctorId], references: [id])
+  doctorId  String  @unique
+  patient   Patient @relation(fields: [patientId], references: [id])
+  patientId String  @unique
 }
 
 enum Role {
@@ -59,4 +75,26 @@ enum Role {
   DOCTOR
   ADMIN
   PATIENT
+}
+
+model Appointment {
+  id        String            @id @default(uuid())
+  date      DateTime
+  status    AppointmentStatus @default(PENDING)
+  patient   Patient           @relation(fields: [patientId], references: [id])
+  patientId String            @unique
+  doctor    Doctor            @relation(fields: [doctorId], references: [id])
+  doctorId  String            @unique
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  PENDING
+  CANCELED
+}
+
+model MedicalFile {
+  id        String  @id @default(uuid())
+  patient   Patient @relation(fields: [patientId], references: [id])
+  patientId String  @unique
 }

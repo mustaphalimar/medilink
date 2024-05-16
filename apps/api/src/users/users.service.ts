@@ -17,18 +17,50 @@ export class UsersService {
 
     createUserDto.password = hashedPassword;
 
-    return this.databaseService.user.create({ data: createUserDto });
+    const user = await this.databaseService.user.create({
+      data: createUserDto,
+    });
+
+    if (user.role === 'DOCTOR') {
+      await this.databaseService.doctor.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    }
+
+    if (user.role === 'SUPER_ADMIN') {
+      await this.databaseService.superAdmin.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    }
+
+    if (user.role === 'PATIENT') {
+      await this.databaseService.patient.create({
+        data: {
+          userId: user.id,
+          gendre: 'male',
+          height: 180,
+          weight: 90,
+          age: 36,
+        },
+      });
+    }
+
+    return user;
   }
 
   async findAll() {
     return this.databaseService.user.findMany({});
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return this.databaseService.user.findUnique({ where: { id } });
   }
 
-  async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
+  async update(id: string, updateUserDto: Prisma.UserUpdateInput) {
     if (updateUserDto.password) {
       const pw = updateUserDto.password;
       if (typeof pw == 'string') {
@@ -36,7 +68,7 @@ export class UsersService {
       }
     }
 
-    return this.databaseService.user.update({
+    return await this.databaseService.user.update({
       where: {
         id,
       },
@@ -44,7 +76,7 @@ export class UsersService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return this.databaseService.user.delete({
       where: { id },
     });

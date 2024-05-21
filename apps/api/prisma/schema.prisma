@@ -82,9 +82,9 @@ model Appointment {
   date      DateTime
   status    AppointmentStatus @default(PENDING)
   patient   Patient           @relation(fields: [patientId], references: [id])
-  patientId String            @unique
+  patientId String
   doctor    Doctor            @relation(fields: [doctorId], references: [id])
-  doctorId  String            @unique
+  doctorId  String
 }
 
 enum AppointmentStatus {

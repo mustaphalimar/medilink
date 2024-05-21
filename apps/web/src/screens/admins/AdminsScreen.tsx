@@ -1,5 +1,4 @@
 import Heading from "@/components/ui/heading";
-
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AdminsTable from "./AdminsTable";

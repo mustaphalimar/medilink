@@ -38,13 +38,19 @@ export class UsersService {
     }
 
     if (user.role === 'PATIENT') {
-      await this.databaseService.patient.create({
+      const patient = await this.databaseService.patient.create({
         data: {
           userId: user.id,
           gendre: 'male',
           height: 180,
           weight: 90,
           age: 36,
+        },
+      });
+
+      await this.databaseService.medicalFile.create({
+        data: {
+          patientId: patient.id,
         },
       });
     }

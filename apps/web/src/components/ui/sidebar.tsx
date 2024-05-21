@@ -47,7 +47,8 @@ const Sidebar = ({ isOpen }: SideBarTypes) => {
 
       <nav className="text-black flex flex-col space-y-3 mt-5">
         <SideLink to="/">
-          <Home /> {isOpen && <span>Overview</span>}
+          <Home />
+          {isOpen && <span>Overview</span>}
         </SideLink>
         <SideLink to="/patients">
           <Users /> {isOpen && <span>My Patients</span>}

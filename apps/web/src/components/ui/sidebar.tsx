@@ -1,4 +1,12 @@
-import { Calendar, Home, Users } from "lucide-react";
+import { TypographyH1 } from "@/Typography/TypographyH1";
+import {
+  Calendar,
+  CircleUser,
+  FileStack,
+  Home,
+  UserRoundCog,
+  Users,
+} from "lucide-react";
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -20,19 +28,42 @@ const SideLink = ({ to, children }: navLinkProps) => {
   );
 };
 
-const Sidebar = () => {
+interface SideBarTypes {
+  isOpen: boolean;
+}
+
+const Sidebar = ({ isOpen }: SideBarTypes) => {
   return (
-    <aside className="w-full  bg-white px-4 py-6">
-      <h1 className="font-bold text-3xl ">MedLink.</h1>
+    <aside className={`w-full bg-white px-4 py-6 relative`}>
+      {isOpen ? (
+        <div className="mx-4">
+          <TypographyH1>MedLink.</TypographyH1>
+        </div>
+      ) : (
+        <div className="invisible">
+          <TypographyH1>.</TypographyH1>
+        </div>
+      )}
+
       <nav className="text-black flex flex-col space-y-3 mt-5">
         <SideLink to="/">
-          <Home /> <span>Home</span>
+          <Home />
+          {isOpen && <span>Overview</span>}
         </SideLink>
         <SideLink to="/patients">
-          <Users /> <span>My Patients</span>
+          <Users /> {isOpen && <span>My Patients</span>}
         </SideLink>
         <SideLink to="/appointements">
-          <Calendar /> <span>Appointements</span>
+          <Calendar /> {isOpen && <span>Appointements</span>}
+        </SideLink>
+        <SideLink to="/admins">
+          <UserRoundCog /> {isOpen && <span>Admins</span>}
+        </SideLink>
+        <SideLink to="/requests">
+          <FileStack /> {isOpen && <span>Requests</span>}
+        </SideLink>
+        <SideLink to="/myprofile">
+          <CircleUser /> {isOpen && <span>My Profile</span>}
         </SideLink>
       </nav>
     </aside>

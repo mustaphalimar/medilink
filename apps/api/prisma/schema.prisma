@@ -39,6 +39,7 @@ model Doctor {
   patients           Patient[]
   PatientsAndDoctors PatientsAndDoctors?
   Appointment        Appointment[]
+  Consultation       Consultation[]
 }
 
 model Admin {
@@ -61,6 +62,7 @@ model Patient {
   weight             Int
   height             Int
   MedicalFile        MedicalFile?
+  Consultation       Consultation[]
 }
 
 model PatientsAndDoctors {
@@ -94,7 +96,20 @@ enum AppointmentStatus {
 }
 
 model MedicalFile {
-  id        String  @id @default(uuid())
-  patient   Patient @relation(fields: [patientId], references: [id])
-  patientId String  @unique
+  id           String         @id @default(uuid())
+  patient      Patient        @relation(fields: [patientId], references: [id])
+  patientId    String         @unique
+  Consultation Consultation[]
+}
+
+model Consultation {
+  id            String      @id @default(uuid())
+  patient       Patient     @relation(fields: [patientId], references: [id])
+  patientId     String      @unique
+  doctor        Doctor      @relation(fields: [doctorId], references: [id])
+  doctorId      String      @unique
+  medicalFile   MedicalFile @relation(fields: [medicalFileId], references: [id])
+  medicalFileId String      @unique
+  instructions  String?
+  medics        String?
 }

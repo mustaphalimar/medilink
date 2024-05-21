@@ -17,4 +17,16 @@ export class PatientService {
       },
     });
   }
+
+  async updateProfileInformations(
+    profileInfos: Prisma.PatientUpdateInput,
+    id: string,
+  ) {
+    return await this.databaseService.patient.update({
+      data: profileInfos,
+      where: {
+        id,
+      },
+    });
+  }
 }

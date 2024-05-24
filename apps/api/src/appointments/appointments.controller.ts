@@ -27,6 +27,11 @@ export class AppointmentsController {
     return this.appointmentsService.getAppointmentsByDoctor(id);
   }
 
+  @Get('my-appointments/scheduled/:id')
+  getScheduledAppointmentsByDoctor(@Param('id') id: string) {
+    return this.appointmentsService.getScheduledAppointmentsByDoctor(id);
+  }
+
   @Post()
   create(@Body() createAppointmentDto: Prisma.AppointmentCreateInput) {
     return this.appointmentsService.create(createAppointmentDto);

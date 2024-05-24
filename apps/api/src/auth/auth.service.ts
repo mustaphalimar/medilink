@@ -19,19 +19,8 @@ export class AuthService {
     // Step 1: Fetch a user with the given email
     const user = await this.prisma.user.findUnique({
       where: { email: email },
-      select: {
-        name: true,
-        id: true,
-        role: true,
-        doctor: {
-          select: {
-            patients: true,
-            Appointment: true,
-            Consultation: true,
-            admins: true,
-          },
-        },
-        password: true,
+      include: {
+        doctor: true,
       },
     });
 

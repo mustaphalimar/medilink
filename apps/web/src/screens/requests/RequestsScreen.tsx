@@ -3,8 +3,24 @@ import Heading from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AdminsTable from "./RequestsTable";
+import { useSelector } from "react-redux";
+import { getUser } from "@/features/user/userSlice";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 const RequestsScreen = () => {
+  const user = useSelector(getUser);
+  const { data, isLoading } = useQuery("getRequests", async () => {
+    try {
+      return await axios(
+        `http://localhost:4000/appointments/my-appointments/${user?.doctor?.id}`
+      );
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  });
+
+  console.log(data);
   return (
     <div>
       <Heading

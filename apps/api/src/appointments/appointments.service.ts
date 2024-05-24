@@ -95,6 +95,20 @@ export class AppointmentsService {
       where: {
         doctorId: id,
       },
+      include: {
+        patient: true,
+      },
+    });
+  }
+  async getScheduledAppointmentsByDoctor(id: string) {
+    return this.databaseService.appointment.findMany({
+      where: {
+        doctorId: id,
+        status: 'SCHEDULED',
+      },
+      include: {
+        patient: true,
+      },
     });
   }
 }

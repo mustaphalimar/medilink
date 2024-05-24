@@ -32,7 +32,11 @@ export class DoctorService {
         id: id,
       },
       include: {
-        patients: true,
+        patients: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
   }

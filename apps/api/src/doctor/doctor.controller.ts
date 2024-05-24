@@ -20,4 +20,14 @@ export class DoctorController {
   ) {
     return this.doctorService.createConsultation(createConsultation);
   }
+
+  @Get('my-patients/:id')
+  getMyPatients(@Param('id') id: string) {
+    return this.doctorService.getMyPatients(id);
+  }
+
+  @Get('my-admins/:id')
+  getMyAdmins(@Param('id') id: string) {
+    return this.doctorService.getMyAdmins(id);
+  }
 }

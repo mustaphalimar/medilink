@@ -14,6 +14,7 @@ const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
       <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <Menu />
       </div>
+
       <div className="flex items-center justify-center space-x-4">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />

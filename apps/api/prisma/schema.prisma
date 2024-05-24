@@ -32,14 +32,13 @@ model SuperAdmin {
 }
 
 model Doctor {
-  id                 String              @id @default(uuid())
-  user               User                @relation(fields: [userId], references: [id])
-  userId             String              @unique
-  admins             Admin[]
-  patients           Patient[]
-  PatientsAndDoctors PatientsAndDoctors?
-  Appointment        Appointment[]
-  Consultation       Consultation[]
+  id           String         @id @default(uuid())
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String         @unique
+  admins       Admin[]
+  patients     Patient[]
+  Appointment  Appointment[]
+  Consultation Consultation[]
 }
 
 model Admin {
@@ -51,25 +50,17 @@ model Admin {
 }
 
 model Patient {
-  id                 String              @id @default(uuid())
-  user               User                @relation(fields: [userId], references: [id])
-  userId             String              @unique
-  doctors            Doctor[]
-  PatientsAndDoctors PatientsAndDoctors?
-  Appointment        Appointment[]
-  gendre             String
-  age                Int
-  weight             Int
-  height             Int
-  MedicalFile        MedicalFile?
-  Consultation       Consultation[]
-}
-
-model PatientsAndDoctors {
-  doctor    Doctor  @relation(fields: [doctorId], references: [id])
-  doctorId  String  @unique
-  patient   Patient @relation(fields: [patientId], references: [id])
-  patientId String  @unique
+  id           String         @id @default(uuid())
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String         @unique
+  doctors      Doctor[]
+  Appointment  Appointment[]
+  gendre       String
+  age          Int
+  weight       Int
+  height       Int
+  MedicalFile  MedicalFile?
+  Consultation Consultation[]
 }
 
 enum Role {

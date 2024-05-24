@@ -17,4 +17,23 @@ export class DoctorService {
       data: createAdmin,
     });
   }
+
+  async getMyPatients(id: string) {
+    return await this.databaseService.doctor.findMany({
+      where: {
+        id: id,
+      },
+      include: {
+        patients: true,
+      },
+    });
+  }
+
+  async getMyAdmins(id: string) {
+    return await this.databaseService.admin.findMany({
+      where: {
+        doctorId: id,
+      },
+    });
+  }
 }

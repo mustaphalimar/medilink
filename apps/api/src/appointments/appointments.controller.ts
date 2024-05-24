@@ -22,6 +22,11 @@ export class AppointmentsController {
     return this.appointmentsService.getAvailableDates(startDate, endDate);
   }
 
+  @Get('my-appointments/:id')
+  getAppointmentsByDoctor(@Param('id') id: string) {
+    return this.appointmentsService.getAppointmentsByDoctor(id);
+  }
+
   @Post()
   create(@Body() createAppointmentDto: Prisma.AppointmentCreateInput) {
     return this.appointmentsService.create(createAppointmentDto);
@@ -38,11 +43,8 @@ export class AppointmentsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateAppointmentDto: Prisma.AppointmentUpdateInput,
-  ) {
-    return this.appointmentsService.update(id, updateAppointmentDto);
+  update(@Param('id') id: string) {
+    return this.appointmentsService.update(id);
   }
 
   @Delete(':id')

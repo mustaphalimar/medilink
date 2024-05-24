@@ -23,16 +23,30 @@ export class AppointmentsService {
     });
   }
 
-  async update(
-    id: string,
-    updateAppointmentDto: Prisma.AppointmentUpdateInput,
-  ) {
-    return await this.databaseService.appointment.update({
+  async update(id: string) {
+    const app = await this.databaseService.appointment.update({
       where: {
         id,
       },
-      data: updateAppointmentDto,
+      data: {
+        status: 'SCHEDULED',
+      },
     });
+
+    await this.databaseService.patient.update({
+      where: {
+        id: app.patientId,
+      },
+      data: {
+        doctors: {
+          connect: {
+            id: app.doctorId,
+          },
+        },
+      },
+    });
+
+    return app;
   }
 
   async remove(id: string) {
@@ -74,5 +88,13 @@ export class AppointmentsService {
     }
 
     return availableDates;
+  }
+
+  async getAppointmentsByDoctor(id: string) {
+    return this.databaseService.appointment.findMany({
+      where: {
+        doctorId: id,
+      },
+    });
   }
 }

@@ -14,6 +14,11 @@ import { Prisma } from '@prisma/client';
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
+  @Get('/:id')
+  getDoctorById(id: string) {
+    return this.doctorService.getDoctorById(id);
+  }
+
   @Post()
   createConsultation(
     @Body() createConsultation: Prisma.ConsultationCreateInput,

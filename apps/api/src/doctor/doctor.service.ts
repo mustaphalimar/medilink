@@ -6,6 +6,14 @@ import { DatabaseService } from 'src/database/database.service';
 export class DoctorService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  async getDoctorById(id: string) {
+    return await this.databaseService.doctor.findFirst({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async createConsultation(createConsultation: Prisma.ConsultationCreateInput) {
     return await this.databaseService.consultation.create({
       data: createConsultation,

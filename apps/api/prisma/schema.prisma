@@ -81,6 +81,7 @@ model Appointment {
 }
 
 enum AppointmentStatus {
+  DONE
   SCHEDULED
   PENDING
   CANCELED

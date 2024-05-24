@@ -23,7 +23,7 @@ export class AppointmentsService {
     });
   }
 
-  async update(id: string) {
+  async updateScheduled(id: string) {
     const app = await this.databaseService.appointment.update({
       where: {
         id,
@@ -47,6 +47,17 @@ export class AppointmentsService {
     });
 
     return app;
+  }
+
+  async updateDone(id: string) {
+    return await this.databaseService.appointment.update({
+      where: {
+        id,
+      },
+      data: {
+        status: 'DONE',
+      },
+    });
   }
 
   async remove(id: string) {

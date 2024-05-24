@@ -47,9 +47,14 @@ export class AppointmentsController {
     return this.appointmentsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string) {
-    return this.appointmentsService.update(id);
+  @Patch('scheduled/:id')
+  updateScheduled(@Param('id') id: string) {
+    return this.appointmentsService.updateScheduled(id);
+  }
+
+  @Patch('done/:id')
+  updateDone(@Param('id') id: string) {
+    return this.appointmentsService.updateDone(id);
   }
 
   @Delete(':id')

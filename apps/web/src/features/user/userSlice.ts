@@ -6,22 +6,21 @@ interface UserState {
   user: {};
 }
 
-// Define the initial state using that type
-const initialState: UserState = {
-  user: {},
-};
+const initialState: UserState = localStorage.getItem("medilink_user")
+  ? JSON.parse(localStorage.getItem("medilink_user") || "")
+  : null;
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<Object>) => {
-      return {
-        user: action.payload,
-      };
+      localStorage.setItem("medilink_user", JSON.stringify(action.payload));
+      return { ...state, user: action.payload };
     },
     destroyUser: (state) => {
-      state.user = {};
+      localStorage.removeItem("medilink_user");
+      return { ...state };
     },
   },
 });
@@ -29,6 +28,6 @@ export const userSlice = createSlice({
 export const { setUser, destroyUser } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const getUser = (state: RootState) => state.user.user;
+export const getUser = (state: RootState) => state?.user;
 
 export default userSlice.reducer;

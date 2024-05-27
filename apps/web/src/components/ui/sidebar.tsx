@@ -1,6 +1,7 @@
 import { TypographyH1 } from "@/Typography/TypographyH1";
 import {
   Calendar,
+  CalendarCheck,
   CircleUser,
   FileStack,
   Home,
@@ -54,10 +55,13 @@ const Sidebar = ({ isOpen }: SideBarTypes) => {
           <Home />
           {isOpen && <span>Overview</span>}
         </SideLink>
+        <SideLink to="/today-appointments">
+          <CalendarCheck /> {isOpen && <span>Today's Patients</span>}
+        </SideLink>
         <SideLink to="/patients">
           <Users /> {isOpen && <span>My Patients</span>}
         </SideLink>
-        <SideLink to="/appointements">
+        <SideLink to="/appointments">
           <Calendar /> {isOpen && <span>Appointements</span>}
         </SideLink>
         <SideLink to="/admins">

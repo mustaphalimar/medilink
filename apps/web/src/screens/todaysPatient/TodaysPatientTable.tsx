@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { CalendarCheck, EyeIcon } from "lucide-react";
+import { CalendarCheck, EyeIcon, PencilIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
+import ConsultationForm from "./ConsultationForm";
 
 const columns: any = [
   {
@@ -40,12 +41,7 @@ const columns: any = [
     selector: (row: TableRow) => {
       return (
         <div className="flex items-center space-x-2">
-          <Button
-            size={"sm"}
-            className="space-x-2  bg-green-500  hover:bg-green-700"
-          >
-            <span>Schedule</span> <CalendarCheck size={20} />
-          </Button>
+          <ConsultationForm />
 
           <Button variant={"outline"} size={"sm"} className="space-x-2">
             <span>Examinate</span> <EyeIcon size={20} />
@@ -53,15 +49,14 @@ const columns: any = [
         </div>
       );
     },
-    sortable: true,
   },
 ];
 
 type requestTable = {
   data: any;
 };
-function RequestsTable({ data }: requestTable) {
+function TodaysPatientTable({ data }: requestTable) {
   return <DataTable columns={columns} data={data} />;
 }
 
-export default RequestsTable;
+export default TodaysPatientTable;

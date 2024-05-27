@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { getUser } from "@/features/user/userSlice";
 import { useQuery } from "react-query";
 import axios from "axios";
-import RequestsTable from "./RequestsTable";
+import TodaysPatientTable from "./TodaysPatientTable";
 
-const RequestsScreen = () => {
+const TodaysPatientScreen = () => {
   const user = useSelector(getUser);
   const { data, isLoading } = useQuery("getRequests", async () => {
     try {
       return await axios(
-        `http://localhost:4000/appointments/my-appointments/${user?.doctor?.id}`
+        `http://localhost:4000/appointments/my-appointments/scheduled/${user?.doctor?.id}`
       );
     } catch (error: any) {
       throw new Error(error);
@@ -21,8 +21,8 @@ const RequestsScreen = () => {
   return (
     <div>
       <Heading
-        title="Appointements Requests"
-        description="Manage Current Appointements Requests"
+        title="Today's Patients"
+        description="Manage Today's Appointements"
       />
 
       <div className="mt-10 space-y-6 ">
@@ -35,10 +35,10 @@ const RequestsScreen = () => {
           />
           <Search className="absolute right-2 text-gray-500" size={18} />
         </div> */}
-        <RequestsTable data={data?.data} />
+        <TodaysPatientTable data={data?.data} />
       </div>
     </div>
   );
 };
 
-export default RequestsScreen;
+export default TodaysPatientScreen;

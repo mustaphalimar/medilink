@@ -3,7 +3,6 @@ import { TypographyH1 } from "@/Typography/TypographyH1";
 import { TypographyP } from "@/Typography/TypographyP";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { z } from "zod";

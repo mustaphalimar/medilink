@@ -19,8 +19,6 @@ const PatientsScreen = () => {
     }
   });
 
-  console.log(data);
-
   return (
     <div>
       <Heading title="My Patients " description="Manage your patients" />
@@ -34,7 +32,11 @@ const PatientsScreen = () => {
           />
           <Search className="absolute right-2 text-gray-500" size={18} />
         </div>
-        {isLoading ? <h1>Loading....</h1> : <PatientsTable />}
+        {isLoading ? (
+          <h1>Loading....</h1>
+        ) : (
+          <PatientsTable data={data?.data[0]?.patients} />
+        )}
       </div>
     </div>
   );

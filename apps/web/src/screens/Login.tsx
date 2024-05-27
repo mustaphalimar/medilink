@@ -20,7 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, setUser } from "@/features/user/userSlice";
 
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -34,6 +34,7 @@ const formSchema = z.object({
 const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,13 +55,13 @@ const Login = () => {
       return await axios.post("http://localhost:4000/auth/login", data);
     },
     {
-      onSuccess: () => {
+      onSuccess: async () => {
         dispatch(setUser(data?.data));
       },
     }
   );
 
-  return user?.id ? (
+  return user?.user?.id ? (
     <Navigate to="/" />
   ) : (
     <div className="p-6 lg:p-0 h-[100vh] w-full bg-gray-100 mx-auto flex items-center justify-center ">

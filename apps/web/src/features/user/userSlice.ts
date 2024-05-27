@@ -6,9 +6,13 @@ interface UserState {
   user: {};
 }
 
-const initialState: UserState = localStorage.getItem("medilink_user")
+const userInfoFromStorage = localStorage.getItem("medilink_user")
   ? JSON.parse(localStorage.getItem("medilink_user") || "")
-  : null;
+  : {};
+
+const initialState: UserState = {
+  user: userInfoFromStorage,
+};
 
 export const userSlice = createSlice({
   name: "user",
@@ -16,11 +20,11 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<Object>) => {
       localStorage.setItem("medilink_user", JSON.stringify(action.payload));
-      return { ...state, user: action.payload };
+      state.user = action.payload;
     },
     destroyUser: (state) => {
       localStorage.removeItem("medilink_user");
-      return { ...state };
+      state.user = {};
     },
   },
 });

@@ -1,7 +1,18 @@
 import { TypographyH5 } from "@/Typography/TypographyH5";
 import { TypographySmall } from "@/Typography/TypographySmall";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, DoorOpen, Menu } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useDispatch } from "react-redux";
+import { destroyUser } from "@/features/user/userSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 interface SideBarTypes {
   isOpen: boolean;
@@ -9,6 +20,7 @@ interface SideBarTypes {
 }
 
 const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
+  const dispatch = useDispatch();
   return (
     <div className="flex w-full justify-between ">
       <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -25,7 +37,26 @@ const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
           <TypographySmall>Cardiologist</TypographySmall>
         </div>
         <div>
-          <ChevronDown className="text-sm cursor-pointer" />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <ChevronDown className="text-sm cursor-pointer" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link to="/myprofile">Profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="space-x-2 cursor-pointer"
+                onClick={() => {
+                  dispatch(destroyUser());
+                }}
+              >
+                <span>Logout</span> <DoorOpen />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>

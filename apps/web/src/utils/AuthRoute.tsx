@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const AuthRoute = () => {
-  const user = useSelector(getUser);
+  const userState = useSelector(getUser);
 
-  console.log(user);
+  console.log(userState);
 
-  return user?.id ? <Outlet /> : <Navigate to="/login" />;
+  return userState?.user?.id ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default AuthRoute;

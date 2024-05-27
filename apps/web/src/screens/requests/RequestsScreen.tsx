@@ -11,7 +11,7 @@ const RequestsScreen = () => {
   const { data, isLoading } = useQuery("getRequests", async () => {
     try {
       return await axios(
-        `http://localhost:4000/appointments/my-appointments/${user?.doctor?.id}`
+        `http://localhost:4000/appointments/my-appointments/${user?.user?.doctor?.id}`
       );
     } catch (error: any) {
       throw new Error(error);

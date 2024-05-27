@@ -12,7 +12,7 @@ const PatientsScreen = () => {
   const { data, isLoading } = useQuery("getPatients", async () => {
     try {
       return await axios(
-        `http://localhost:4000/doctor/my-patients/${user?.doctor?.id}`
+        `http://localhost:4000/doctor/my-patients/${user?.user?.doctor?.id}`
       );
     } catch (error: any) {
       throw new Error(error);

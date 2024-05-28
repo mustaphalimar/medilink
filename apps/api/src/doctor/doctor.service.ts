@@ -24,6 +24,9 @@ export class DoctorService {
       where: {
         id: id,
       },
+      include: {
+        user: true,
+      },
     });
   }
 

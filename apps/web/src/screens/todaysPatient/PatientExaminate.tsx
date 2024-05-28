@@ -77,7 +77,7 @@ const PatientExaminate = ({ id }: patientExaminate) => {
             <Input disabled value={patient?.height} type="text" />
           </div>
 
-          <div className="col-start-1 row-start-4 col-span-full h-[200px] overflow-y-scroll">
+          <div className="col-start-1 row-span-7 col-span-8  ">
             <h3 className="text-xl font-medium flex items-center space-x-2">
               <span>
                 <FileClock size={20} />

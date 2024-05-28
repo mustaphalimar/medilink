@@ -13,7 +13,7 @@ const DisplayCard = ({ styling, title, count, Icon }: displayCardProps) => {
     <div
       className={classNames(
         "py-6 flex space-x-4 itmes-center justify-center rounded-md text-white max-w-[300px] w-full",
-        styling
+        styling,
       )}
     >
       <div className={`text-white rounded-full p-4 bg-white/10 text-sm `}>

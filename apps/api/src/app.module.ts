@@ -9,7 +9,14 @@ import { PatientModule } from './patient/patient.module';
 import { DoctorModule } from './doctor/doctor.module';
 
 @Module({
-  imports: [UsersModule, DatabaseModule, AuthModule, AppointmentsModule, PatientModule, DoctorModule],
+  imports: [
+    UsersModule,
+    DatabaseModule,
+    AuthModule,
+    AppointmentsModule,
+    PatientModule,
+    DoctorModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

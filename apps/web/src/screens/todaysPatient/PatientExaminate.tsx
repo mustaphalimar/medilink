@@ -81,7 +81,7 @@ const PatientExaminate = ({ id }: patientExaminate) => {
               <Input disabled value={patient?.height} type="text" />
             </div>
 
-            <div className="col-start-1 row-span-7 col-span-8 ">
+            <div className="col-start-1 row-span-7 col-span-8 mx-6">
               <h3 className="text-xl font-medium flex items-center space-x-2">
                 <span>
                   <FileClock size={20} />

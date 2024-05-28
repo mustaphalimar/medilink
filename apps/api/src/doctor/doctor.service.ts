@@ -6,6 +6,19 @@ import { DatabaseService } from 'src/database/database.service';
 export class DoctorService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  async getDoctors() {
+    return await this.databaseService.doctor.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+
   async getDoctorById(id: string) {
     return await this.databaseService.doctor.findFirst({
       where: {

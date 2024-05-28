@@ -58,7 +58,7 @@ const Login = () => {
       onSuccess: () => {
         dispatch(setUser(data?.data));
       },
-    }
+    },
   );
 
   return user?.user?.id ? (

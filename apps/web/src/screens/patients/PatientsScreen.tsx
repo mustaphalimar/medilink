@@ -12,14 +12,12 @@ const PatientsScreen = () => {
   const { data, isLoading } = useQuery("getPatients", async () => {
     try {
       return await axios(
-        `http://localhost:4000/doctor/my-patients/${user?.doctor?.id}`
+        `http://localhost:4000/doctor/my-patients/${user?.user?.doctor?.id}`
       );
     } catch (error: any) {
       throw new Error(error);
     }
   });
-
-  console.log(data);
 
   return (
     <div>
@@ -34,7 +32,11 @@ const PatientsScreen = () => {
           />
           <Search className="absolute right-2 text-gray-500" size={18} />
         </div>
-        {isLoading ? <h1>Loading....</h1> : <PatientsTable />}
+        {isLoading ? (
+          <h1>Loading....</h1>
+        ) : (
+          <PatientsTable data={data?.data[0]?.patients} />
+        )}
       </div>
     </div>
   );

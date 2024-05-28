@@ -1,32 +1,36 @@
+import { Button } from "@/components/ui/button";
+import { EyeIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
+import PatientExaminate from "../todaysPatient/PatientExaminate";
 
 const columns: any = [
   {
     name: "Full Name",
-    selector: (row: TableRow) => row.title,
+    selector: (row: TableRow) => row?.user?.name,
     sortable: true,
   },
   {
-    name: "Birth Year",
-    selector: (row: TableRow) => row.year,
+    name: "Height",
+    selector: (row: TableRow) => row?.height,
     sortable: true,
   },
-];
-
-const data = [
   {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
+    name: "Actions",
+    selector: (row: TableRow) => {
+      return (
+        <div className="flex items-center space-x-2">
+          <PatientExaminate />
+        </div>
+      );
+    },
   },
 ];
 
-function PatientsTable() {
+type patientTable = {
+  data: any;
+};
+
+function PatientsTable({ data }: patientTable) {
   return <DataTable columns={columns} data={data} />;
 }
 

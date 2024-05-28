@@ -105,6 +105,7 @@ export class AppointmentsService {
     return this.databaseService.appointment.findMany({
       where: {
         doctorId: id,
+        status: 'PENDING',
       },
       include: {
         patient: true,

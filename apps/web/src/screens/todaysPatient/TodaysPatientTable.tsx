@@ -40,6 +40,7 @@ const columns: any = [
     sortable: true,
   },
   {
+    grow: 2,
     name: "Actions",
     selector: (row: TableRow) => {
       return (
@@ -57,7 +58,7 @@ type requestTable = {
   data: any;
 };
 function TodaysPatientTable({ data }: requestTable) {
-  return <DataTable columns={columns} data={data} />;
+  return <DataTable columns={columns} data={data} responsive={true} />;
 }
 
 export default TodaysPatientTable;

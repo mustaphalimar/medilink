@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, setUser } from "@/features/user/userSlice";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -44,21 +45,25 @@ const Login = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    await mutate(values);
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    mutate(values);
   }
 
-  const { data, mutate } = useMutation(
-    "login",
-
+  const { mutate, isLoading, error } = useMutation(
     async (data: { email: string; password: string }) => {
-      return await axios.post("http://localhost:4000/auth/login", data);
+      const response = await axios.post(
+        "http://localhost:4000/auth/login",
+        data
+      );
+      return response.data;
     },
     {
-      onSuccess: () => {
-        dispatch(setUser(data?.data));
+      onSuccess: (data) => {
+        if (data) {
+          dispatch(setUser(data));
+        }
       },
-    },
+    }
   );
 
   return user?.user?.id ? (
@@ -119,7 +124,14 @@ const Login = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <BeatLoader color="#36d7b7" size={10} />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
             </form>
           </Form>
         </div>

@@ -6,8 +6,8 @@ interface UserState {
   user: {};
 }
 
-const userInfoFromStorage = localStorage.getItem("medilink_user")
-  ? JSON.parse(localStorage.getItem("medilink_user") || "")
+const userInfoFromStorage = localStorage?.getItem("medilink_user")
+  ? JSON.parse(localStorage?.getItem("medilink_user") || " ")
   : {};
 
 const initialState: UserState = {

@@ -19,7 +19,7 @@ const columns: any = [
     selector: (row: TableRow) => {
       return (
         <div className="flex items-center space-x-2">
-          <PatientExaminate />
+          <PatientExaminate id={row?.id} />
         </div>
       );
     },

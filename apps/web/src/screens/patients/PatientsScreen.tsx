@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getUser } from "@/features/user/userSlice";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
 
 const PatientsScreen = () => {
   const user = useSelector(getUser);
@@ -33,7 +34,7 @@ const PatientsScreen = () => {
           <Search className="absolute right-2 text-gray-500" size={18} />
         </div>
         {isLoading ? (
-          <h1>Loading....</h1>
+          <TableSkeleton />
         ) : (
           <PatientsTable data={data?.data[0]?.patients} />
         )}

@@ -5,10 +5,11 @@ import { getUser } from "@/features/user/userSlice";
 import { useQuery } from "react-query";
 import axios from "axios";
 import TodaysPatientTable from "./TodaysPatientTable";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
 
 const TodaysPatientScreen = () => {
   const user = useSelector(getUser);
-  const { data, isLoading } = useQuery("getRequests", async () => {
+  const { data, isLoading } = useQuery("getRequestsScheduled", async () => {
     try {
       return await axios(
         `http://localhost:4000/appointments/my-appointments/scheduled/${user?.user?.doctor?.id}`
@@ -35,7 +36,11 @@ const TodaysPatientScreen = () => {
           />
           <Search className="absolute right-2 text-gray-500" size={18} />
         </div> */}
-        <TodaysPatientTable data={data?.data} />
+        {isLoading ? (
+          <TableSkeleton />
+        ) : (
+          <TodaysPatientTable data={data?.data} />
+        )}
       </div>
     </div>
   );

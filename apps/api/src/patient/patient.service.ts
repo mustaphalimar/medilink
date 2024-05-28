@@ -6,6 +6,19 @@ import { DatabaseService } from 'src/database/database.service';
 export class PatientService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  async getPatientById(id: string) {
+    return await this.databaseService.patient.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        user: true,
+        Consultation: true,
+        MedicalFile: true,
+      },
+    });
+  }
+
   async updateMedicalFile(
     medicalFile: Prisma.MedicalFileUpdateInput,
     id: string,

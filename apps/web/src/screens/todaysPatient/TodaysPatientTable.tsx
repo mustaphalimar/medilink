@@ -16,6 +16,8 @@ const columns: any = [
         day: "numeric",
         hour: "2-digit",
         minute: "2-digit",
+        weekday: "long",
+
         // second: "2-digit",
         // timeZoneName: "short", // This includes the time zone
       };
@@ -44,7 +46,7 @@ const columns: any = [
         <div className="flex items-center space-x-2">
           <ConsultationForm />
 
-          <PatientExaminate />
+          <PatientExaminate id={row?.patientId} />
         </div>
       );
     },

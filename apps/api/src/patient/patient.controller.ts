@@ -15,6 +15,11 @@ import { Prisma } from '@prisma/client';
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
+  @Get('/:id')
+  getPatientById(@Param('id') id: string) {
+    return this.patientService.getPatientById(id);
+  }
+
   @Patch('/medical-file/:id')
   update(
     @Param('id') id: string,

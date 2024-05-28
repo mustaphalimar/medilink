@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import AuthRoute from "./utils/AuthRoute";
 import TodaysPatientScreen from "./screens/todaysPatient/TodaysPatientScreen";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ function App() {
           </Routes>
         </QueryClientProvider>
       </Provider>
+      <Toaster />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
+import PatientExaminate from "../todaysPatient/PatientExaminate";
 
 const columns: any = [
   {
@@ -18,9 +19,7 @@ const columns: any = [
     selector: (row: TableRow) => {
       return (
         <div className="flex items-center space-x-2">
-          <Button variant={"outline"} size={"sm"} className="space-x-2">
-            <span>Examinate</span> <EyeIcon size={20} />
-          </Button>
+          <PatientExaminate />
         </div>
       );
     },

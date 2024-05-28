@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarCheck, EyeIcon, PencilIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
 import ConsultationForm from "./ConsultationForm";
+import PatientExaminate from "./PatientExaminate";
 
 const columns: any = [
   {
@@ -43,9 +44,7 @@ const columns: any = [
         <div className="flex items-center space-x-2">
           <ConsultationForm />
 
-          <Button variant={"outline"} size={"sm"} className="space-x-2">
-            <span>Examinate</span> <EyeIcon size={20} />
-          </Button>
+          <PatientExaminate />
         </div>
       );
     },

@@ -9,22 +9,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PencilIcon } from "lucide-react";
+import { EyeIcon, PencilIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const ConsultationForm = () => {
+const PatientExaminate = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button size={"sm"} className="space-x-2 bg-blue-500 hover:bg-blue-700">
-          <span>Create Consultation</span> <PencilIcon size={20} />
+        <Button variant={"outline"} size={"sm"} className="space-x-2">
+          <span>Examinate</span> <EyeIcon size={20} />
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-max">
         <DialogHeader>
-          <DialogTitle className="text-2xl pb-6">
-            Consultation For Patient {"{Azirgui}"}
-          </DialogTitle>
+          <DialogTitle className="text-3xl pb-6">Patient Card</DialogTitle>
         </DialogHeader>
         <div className="grid grid-cols-3 grid-rows-5 gap-10">
           <div className="row-span-full">
@@ -35,45 +33,45 @@ const ConsultationForm = () => {
           </div>
 
           <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="text" />
+            <Label>Full Name</Label>
+            <Input placeholder="Full Name" type="text" />
           </div>
           <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
+            <Label>Weight</Label>
+            <Input placeholder="Email" type="email" />
           </div>
 
           <div className="col-start-2">
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
+            <Label>Gendre</Label>
+            <Input placeholder="Email" type="email" />
           </div>
           <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="password" />
+            <Label>Height</Label>
+            <Input placeholder="password" type="password" />
           </div>
           <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
+            <Label>Height</Label>
+            <Input placeholder="password" type="password" />
           </div>
           <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
+            <Label>Height</Label>
+            <Input placeholder="password" type="password" />
           </div>
           <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
+            <Label>Height</Label>
+            <Input placeholder="password" type="password" />
           </div>
           <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
+            <Label>Height</Label>
+            <Input placeholder="password" type="password" />
           </div>
         </div>
         <DialogClose>
-          <Button className="w-full">Add Consultation</Button>
+          <Button className="w-full">Done</Button>
         </DialogClose>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default ConsultationForm;
+export default PatientExaminate;

@@ -44,8 +44,8 @@ const Login = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    mutate(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await mutate(values);
   }
 
   const { data, mutate } = useMutation(
@@ -55,7 +55,7 @@ const Login = () => {
       return await axios.post("http://localhost:4000/auth/login", data);
     },
     {
-      onSuccess: async () => {
+      onSuccess: () => {
         dispatch(setUser(data?.data));
       },
     }

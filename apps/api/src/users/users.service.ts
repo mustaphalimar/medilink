@@ -19,6 +19,9 @@ export class UsersService {
 
     const user = await this.databaseService.user.create({
       data: createUserDto,
+      include: {
+        patient: true,
+      },
     });
 
     if (user.role === 'DOCTOR') {

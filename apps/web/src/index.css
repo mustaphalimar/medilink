@@ -13,6 +13,11 @@
   font-family: "Inter", sans-serif;
 }
 
+::selection {
+  color: white;
+  background: #16a34a;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

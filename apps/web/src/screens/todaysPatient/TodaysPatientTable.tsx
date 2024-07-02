@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { CalendarCheck, EyeIcon, PencilIcon } from "lucide-react";
+import { PencilIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
-import ConsultationForm from "./ConsultationForm";
 import PatientExaminate from "./PatientExaminate";
 import { useNavigate } from "react-router-dom";
 

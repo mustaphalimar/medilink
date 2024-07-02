@@ -3,6 +3,7 @@ import { CalendarCheck, EyeIcon, PencilIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
 import ConsultationForm from "./ConsultationForm";
 import PatientExaminate from "./PatientExaminate";
+import { useNavigate } from "react-router-dom";
 
 const columns: any = [
   {
@@ -43,9 +44,20 @@ const columns: any = [
     grow: 2,
     name: "Actions",
     selector: (row: TableRow) => {
+      const navigate = useNavigate();
       return (
         <div className="flex items-center space-x-2">
-          <ConsultationForm />
+          {/* <ConsultationForm />
+           */}
+          <Button
+            onClick={() => {
+              navigate(`/consultation/${row?.patientId}`);
+            }}
+            size={"sm"}
+            className="space-x-2 bg-blue-500 hover:bg-blue-700"
+          >
+            <span>Create Consultation</span> <PencilIcon size={20} />
+          </Button>
 
           <PatientExaminate id={row?.patientId} />
         </div>

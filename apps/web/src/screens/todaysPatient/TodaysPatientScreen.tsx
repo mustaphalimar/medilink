@@ -1,10 +1,10 @@
 import Heading from "@/components/ui/heading";
-
 import { useSelector } from "react-redux";
 import { getUser } from "@/features/user/userSlice";
 import { useQuery } from "react-query";
 import axios from "axios";
 import TodaysPatientTable from "./TodaysPatientTable";
+
 import { TableSkeleton } from "@/components/ui/TableSkeleton";
 
 const TodaysPatientScreen = () => {

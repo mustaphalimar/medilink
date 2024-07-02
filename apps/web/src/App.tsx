@@ -14,6 +14,7 @@ import { store } from "./store/store";
 import AuthRoute from "./utils/AuthRoute";
 import TodaysPatientScreen from "./screens/todaysPatient/TodaysPatientScreen";
 import { Toaster } from "./components/ui/sonner";
+import ConsulationPage from "./screens/consulation/ConsultationPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,6 +32,10 @@ function App() {
                 <Route
                   path="today-appointments"
                   element={<TodaysPatientScreen />}
+                />
+                <Route
+                  path="consultation/:patientId"
+                  element={<ConsulationPage />}
                 />
                 <Route path="admins" element={<AdminsScreen />} />
                 <Route path="requests" element={<RequestsScreen />} />

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { PencilIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Editor from "@/components/Editor";
 
 const ConsultationForm = () => {
   return (
@@ -32,40 +33,6 @@ const ConsultationForm = () => {
               <AvatarImage src="https://media.licdn.com/dms/image/D4E03AQH18wOjTHgOww/profile-displayphoto-shrink_800_800/0/1677798557815?e=1722470400&v=beta&t=XvuEKjaswz_Rcl5iWqWnKjmU4tJu1XzegMM2VCFIbOs" />
               <AvatarFallback>Admin</AvatarFallback>
             </Avatar>
-          </div>
-
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="text" />
-          </div>
-          <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
-          </div>
-
-          <div className="col-start-2">
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
-          </div>
-          <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="password" />
-          </div>
-          <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
           </div>
         </div>
         <DialogClose>

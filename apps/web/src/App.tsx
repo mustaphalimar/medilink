@@ -15,6 +15,7 @@ import AuthRoute from "./utils/AuthRoute";
 import TodaysPatientScreen from "./screens/todaysPatient/TodaysPatientScreen";
 import { Toaster } from "./components/ui/sonner";
 import ConsulationPage from "./screens/consulation/ConsultationPage";
+import PatientProfile from "./screens/patient/PatientProfile";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="/" element={<OverviewScreen />} />
                 <Route path="patients" element={<PatientsScreen />} />
+                <Route path="patient/:patientId" element={<PatientProfile />} />
                 <Route path="appointments" element={<AppointementsScreen />} />
                 <Route
                   path="today-appointments"

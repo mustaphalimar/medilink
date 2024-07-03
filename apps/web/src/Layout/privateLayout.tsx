@@ -10,9 +10,11 @@ const PrivateLayout = () => {
       <div className="max-w-[380px]">
         <Sidebar isOpen={isOpen} />
       </div>
-      <div className="w-full  bg-secondary min-h-[100vh] p-4 px-10 space-y-10">
+      <div className="w-full  bg-white min-h-[100vh]  space-y-10">
         <TopBar isOpen={isOpen} setIsOpen={setIsOpen} />
-        <Outlet />
+        <div className="px-10">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

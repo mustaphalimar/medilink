@@ -24,7 +24,7 @@ export class DoctorController {
     return this.doctorService.getDoctorById(id);
   }
 
-  @Post()
+  @Post('/create-consultation')
   createConsultation(
     @Body() createConsultation: Prisma.ConsultationCreateInput,
   ) {

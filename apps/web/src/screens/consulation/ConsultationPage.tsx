@@ -2,20 +2,52 @@ import Editor from "@/components/Editor";
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { useState } from "react";
-
-function createMarkup(dirty: any) {
-  return { __html: dirty };
-}
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Terminal } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import BeatLoader from "react-spinners/BeatLoader";
+import { getPatientById, postConsultation } from "@/api/api";
+import { getUser } from "@/features/user/userSlice";
+import { useSelector } from "react-redux";
+import { createMarkup } from "@/utils/CreateMarkup";
 
 function ConsulationPage() {
+  const { patientId } = useParams();
+  const user = useSelector(getUser);
+
+  const { data } = useQuery(`getUser${patientId}`, () =>
+    getPatientById(patientId)
+  );
+
+  const patient = data?.data;
+
   const [value, setValue] = useState("");
   const date = new Date();
+
+  const { mutate, isLoading: loading } = useMutation(() =>
+    postConsultation({
+      patientId,
+      doctorId: user?.user?.doctor?.id,
+      medicalFileId: patient?.MedicalFile?.id,
+      instructions: value,
+    })
+  );
   return (
     <div>
       <Heading
-        title="Consultation For Azirgui"
+        title={`Consultation For ${patient?.user?.name?.toString().toUpperCase()}`}
         description="Consulation in making"
       />
+
+      <Alert className="my-6">
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>Heads up!</AlertTitle>
+        <AlertDescription>
+          You can make a column layout row by giving your previous input some
+          styling (bold, italic..), then click the TAB key on your keyboard.
+        </AlertDescription>
+      </Alert>
       <p className="italic text-neutral-500">
         Date: {date.toDateString()} {date.toLocaleTimeString()}
       </p>
@@ -37,7 +69,13 @@ function ConsulationPage() {
       </div>
 
       <div className="my-4">
-        <Button onClick={() => console.log(value)}>Submit Consultation</Button>
+        <Button onClick={() => mutate()} type="button" disabled={loading}>
+          {loading ? (
+            <BeatLoader color="#36d7b7" size={10} />
+          ) : (
+            "Submit Consultation"
+          )}
+        </Button>
       </div>
     </div>
   );

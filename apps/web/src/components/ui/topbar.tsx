@@ -22,7 +22,7 @@ interface SideBarTypes {
 const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
   const dispatch = useDispatch();
   return (
-    <div className="flex w-full justify-between ">
+    <div className="flex w-full items-center justify-between border-b pt-4 py-1 px-10">
       <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <Menu />
       </div>

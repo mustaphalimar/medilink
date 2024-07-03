@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 interface UserState {
-  user: {};
+  user: any;
 }
 
 const userInfoFromStorage = localStorage?.getItem("medilink_user")

@@ -1,8 +1,9 @@
 import axios from "axios";
+const url = "http://localhost:4000";
 
 export const getPatientById = async (patientId: string | undefined) => {
   try {
-    return await axios(`http://localhost:4000/patient/${patientId}`);
+    return await axios(`${url}/patient/${patientId}`);
   } catch (error: any) {
     throw new Error(error);
   }
@@ -15,7 +16,7 @@ export const postConsultation = async (data: {
   instructions: string | undefined;
 }) => {
   try {
-    return await axios(`http://localhost:4000/doctor/create-consultation`, {
+    return await axios(`${url}/doctor/create-consultation`, {
       method: "POST",
       data: data,
     });

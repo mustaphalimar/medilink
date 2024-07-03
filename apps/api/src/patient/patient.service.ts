@@ -13,7 +13,24 @@ export class PatientService {
       },
       include: {
         user: true,
-        Consultation: true,
+        Appointment: {
+          include: {
+            doctor: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
+        Consultation: {
+          include: {
+            doctor: {
+              include: {
+                user: true,
+              },
+            },
+          },
+        },
         MedicalFile: true,
       },
     });

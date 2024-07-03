@@ -76,6 +76,9 @@
 ul {
   list-style-type: disc;
 }
+ol {
+  list-style-type: decimal;
+}
 .ql-editor {
   min-height: 250px !important;
 }

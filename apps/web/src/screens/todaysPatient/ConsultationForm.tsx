@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { PencilIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Editor from "@/components/Editor";
 
 const ConsultationForm = () => {
   return (

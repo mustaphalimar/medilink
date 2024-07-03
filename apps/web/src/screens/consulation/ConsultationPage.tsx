@@ -9,12 +9,16 @@ function createMarkup(dirty: any) {
 
 function ConsulationPage() {
   const [value, setValue] = useState("");
+  const date = new Date();
   return (
     <div>
       <Heading
         title="Consultation For Azirgui"
         description="Consulation in making"
       />
+      <p className="italic text-neutral-500">
+        Date: {date.toDateString()} {date.toLocaleTimeString()}
+      </p>
       <div className="my-6">
         <Editor value={value} setValue={setValue} />
       </div>
@@ -23,6 +27,9 @@ function ConsulationPage() {
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight border-b">
           Consultation Display
         </h3>
+        <p className="italic text-neutral-500">
+          Date: {date.toDateString()} {date.toLocaleTimeString()}
+        </p>
         <div
           dangerouslySetInnerHTML={createMarkup(value)}
           className="space-y-4 p-6 co_ren"

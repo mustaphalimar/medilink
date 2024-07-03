@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 const AuthRoute = () => {
   const userState = useSelector(getUser);
 
-  console.log(userState);
-
   return userState?.user?.id ? <Outlet /> : <Navigate to="/login" />;
 };
 

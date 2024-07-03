@@ -35,7 +35,7 @@ interface SideBarTypes {
 
 const Sidebar = ({ isOpen }: SideBarTypes) => {
   return (
-    <aside className={`w-full  px-4 py-6 relative`}>
+    <aside className={`w-full  px-4 py-6 relative border-r h-full`}>
       {isOpen ? (
         <div className="mx-4 text-primary pb-4">
           <h1 className="text-5xl font-black">MediLink.</h1>

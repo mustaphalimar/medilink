@@ -33,40 +33,6 @@ const ConsultationForm = () => {
               <AvatarFallback>Admin</AvatarFallback>
             </Avatar>
           </div>
-
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="text" />
-          </div>
-          <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
-          </div>
-
-          <div className="col-start-2">
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="email" />
-          </div>
-          <div>
-            <Label>Medics</Label>
-            <Input placeholder="Medics" type="password" />
-          </div>
-          <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div className="col-start-2">
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
-          <div>
-            <Label>Insctructions</Label>
-            <Input placeholder="Insctructions" type="password" />
-          </div>
         </div>
         <DialogClose>
           <Button className="w-full">Add Consultation</Button>

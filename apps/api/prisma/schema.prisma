@@ -103,5 +103,4 @@ model Consultation {
   medicalFile   MedicalFile @relation(fields: [medicalFileId], references: [id])
   medicalFileId String      @unique
   instructions  String?
-  medics        String?
 }

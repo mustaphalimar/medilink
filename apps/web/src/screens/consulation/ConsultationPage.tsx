@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { createMarkup } from "@/utils/CreateMarkup";
 
 function ConsulationPage() {
-  const { patientId } = useParams();
+  const { patientId, appointmentId } = useParams();
   const user = useSelector(getUser);
 
   const { data } = useQuery(`getUser${patientId}`, () =>
@@ -31,6 +31,7 @@ function ConsulationPage() {
       doctorId: user?.user?.doctor?.id,
       medicalFileId: patient?.MedicalFile?.id,
       instructions: value,
+      appointmentId,
     })
   );
   return (

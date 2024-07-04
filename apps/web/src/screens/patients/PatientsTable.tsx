@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
 import PatientExaminate from "../todaysPatient/PatientExaminate";
+import { useNavigate } from "react-router-dom";
 
 const columns: any = [
   {
@@ -17,9 +18,19 @@ const columns: any = [
   {
     name: "Actions",
     selector: (row: TableRow) => {
+      const navigate = useNavigate();
       return (
         <div className="flex items-center space-x-2">
-          <PatientExaminate id={row?.id} />
+          <Button
+            onClick={() => {
+              navigate(`/patient/${row?.id}`);
+            }}
+            variant={"outline"}
+            size={"sm"}
+            className="space-x-2"
+          >
+            <span>Examinate</span> <EyeIcon size={20} />
+          </Button>
         </div>
       );
     },

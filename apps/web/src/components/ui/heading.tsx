@@ -6,10 +6,13 @@ interface headingProps {
 
 const Heading = ({ title, description }: headingProps) => {
   return (
-    <>
-      <TypographyH1>{title}</TypographyH1>
+    <p>
+      <TypographyH1>
+        <span className="capitalize">{title}</span>
+      </TypographyH1>
+
       <p className="text-lg mt-3 text-gray-700">{description}</p>
-    </>
+    </p>
   );
 };
 

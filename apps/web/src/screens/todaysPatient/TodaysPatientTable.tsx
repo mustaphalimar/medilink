@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { PencilIcon } from "lucide-react";
+import { EyeIcon, PencilIcon } from "lucide-react";
 import DataTable, { TableRow } from "react-data-table-component";
 import PatientExaminate from "./PatientExaminate";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const columns: any = [
            */}
           <Button
             onClick={() => {
-              navigate(`/consultation/${row?.patientId}`);
+              navigate(`/consultation/${row?.patientId}/${row?.id}`);
             }}
             size={"sm"}
             className="space-x-2 bg-blue-500 hover:bg-blue-700"
@@ -58,7 +58,16 @@ const columns: any = [
             <span>Create Consultation</span> <PencilIcon size={20} />
           </Button>
 
-          <PatientExaminate id={row?.patientId} />
+          <Button
+            onClick={() => {
+              navigate(`/patient/${row?.patientId}`);
+            }}
+            variant={"outline"}
+            size={"sm"}
+            className="space-x-2"
+          >
+            <span>Examinate</span> <EyeIcon size={20} />
+          </Button>
         </div>
       );
     },

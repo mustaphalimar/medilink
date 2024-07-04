@@ -36,7 +36,7 @@ function App() {
                   element={<TodaysPatientScreen />}
                 />
                 <Route
-                  path="consultation/:patientId"
+                  path="consultation/:patientId/:appointmentId"
                   element={<ConsulationPage />}
                 />
                 <Route path="admins" element={<AdminsScreen />} />

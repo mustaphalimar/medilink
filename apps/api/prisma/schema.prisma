@@ -71,13 +71,14 @@ enum Role {
 }
 
 model Appointment {
-  id        String            @id @default(uuid())
-  date      DateTime
-  status    AppointmentStatus @default(PENDING)
-  patient   Patient           @relation(fields: [patientId], references: [id])
-  patientId String
-  doctor    Doctor            @relation(fields: [doctorId], references: [id])
-  doctorId  String
+  id           String            @id @default(uuid())
+  date         DateTime
+  status       AppointmentStatus @default(PENDING)
+  patient      Patient           @relation(fields: [patientId], references: [id])
+  patientId    String
+  doctor       Doctor            @relation(fields: [doctorId], references: [id])
+  doctorId     String
+  Consultation Consultation?
 }
 
 enum AppointmentStatus {
@@ -104,4 +105,6 @@ model Consultation {
   medicalFileId String
   instructions  String?
   createdAt     DateTime    @default(now()) @db.Timestamptz(3)
+  appointmentId String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
 }

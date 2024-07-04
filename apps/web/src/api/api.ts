@@ -12,6 +12,7 @@ export const getPatientById = async (patientId: string | undefined) => {
 export const postConsultation = async (data: {
   patientId: string | undefined;
   doctorId: string | undefined;
+  appointmentId: string | undefined;
   medicalFileId: string | undefined;
   instructions: string | undefined;
 }) => {
@@ -19,6 +20,16 @@ export const postConsultation = async (data: {
     return await axios(`${url}/doctor/create-consultation`, {
       method: "POST",
       data: data,
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const appointementDone = async (id: string | undefined) => {
+  try {
+    return await axios(`${url}/appointments/done/${id}`, {
+      method: "PATCH",
     });
   } catch (error: any) {
     throw new Error(error);

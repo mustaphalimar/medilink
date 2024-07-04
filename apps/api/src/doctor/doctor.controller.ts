@@ -9,10 +9,14 @@ import {
 } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { Prisma } from '@prisma/client';
+import { AppointmentsService } from 'src/appointments/appointments.service';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) {}
+  constructor(
+    private readonly doctorService: DoctorService,
+    private readonly appointmentsService: AppointmentsService,
+  ) {}
 
   @Get()
   getDoctors() {
@@ -25,10 +29,13 @@ export class DoctorController {
   }
 
   @Post('/create-consultation')
-  createConsultation(
+  async createConsultation(
     @Body() createConsultation: Prisma.ConsultationCreateInput,
   ) {
-    return this.doctorService.createConsultation(createConsultation);
+    const consultation =
+      await this.doctorService.createConsultation(createConsultation);
+    await this.appointmentsService.updateDone(consultation.appointmentId);
+    return consultation;
   }
 
   @Get('my-patients/:id')

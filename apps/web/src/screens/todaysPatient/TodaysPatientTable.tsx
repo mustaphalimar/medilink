@@ -50,7 +50,7 @@ const columns: any = [
            */}
           <Button
             onClick={() => {
-              navigate(`/consultation/${row?.patientId}`);
+              navigate(`/consultation/${row?.patientId}/${row?.id}`);
             }}
             size={"sm"}
             className="space-x-2 bg-blue-500 hover:bg-blue-700"

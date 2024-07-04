@@ -5,6 +5,7 @@ export type Consultation = {
   medicalFileId: string;
   instructions: string;
   createdAt: string;
+  appointmentId: string;
   doctor: {
     user: {
       name: string;

@@ -1,4 +1,3 @@
-import { TypographyH1 } from "@/Typography/TypographyH1";
 import {
   Calendar,
   CalendarCheck,

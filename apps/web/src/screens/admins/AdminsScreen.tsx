@@ -3,6 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AdminsTable from "./AdminsTable";
 import AdminForm from "./AdminForm";
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
+import { data } from "./data";
 
 const AdminsScreen = () => {
   return (
@@ -13,16 +16,8 @@ const AdminsScreen = () => {
       </div>
 
       <div className="mt-10 space-y-6 ">
-        <div className="grid w-full max-w-sm items-center gap-1.5 relative">
-          <Input
-            type="text"
-            id="search"
-            placeholder="Search Admins "
-            className="pr-8"
-          />
-          <Search className="absolute right-2 text-gray-500" size={18} />
-        </div>
-        <AdminsTable />
+        {/* <AdminsTable /> */}
+        <DataTable columns={columns} data={data} />
       </div>
     </div>
   );

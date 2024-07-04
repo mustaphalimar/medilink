@@ -1,13 +1,16 @@
 import { TypographyH3 } from "@/Typography/TypographyH3";
 import { TypographySmall } from "@/Typography/TypographySmall";
 import DisplayCard from "@/components/ui/displayCard";
+import { getUser } from "@/features/user/userSlice";
 import { Briefcase, Calendar, User, Video } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const OverviewScreen = () => {
+  const { user } = useSelector(getUser);
   return (
     <div>
       <div className="pb-6">
-        <TypographyH3>Welcome, Dr. MohamedAmine</TypographyH3>
+        <TypographyH3>Welcome, Dr.{user?.name}</TypographyH3>
         <TypographySmall>Have a nice day at work</TypographySmall>
       </div>
 

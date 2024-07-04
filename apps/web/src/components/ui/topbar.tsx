@@ -12,15 +12,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useDispatch } from "react-redux";
 import { destroyUser } from "@/features/user/userSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface SideBarTypes {
   isOpen: boolean;
   setIsOpen: (p: boolean) => void;
+  user: any;
 }
 
-const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
+const TopBar = ({ isOpen, setIsOpen, user }: SideBarTypes) => {
   const dispatch = useDispatch();
+
   return (
     <div className="flex w-full items-center justify-between border-b pt-4 py-1 px-10 shadow-sm">
       <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -33,7 +35,7 @@ const TopBar = ({ isOpen, setIsOpen }: SideBarTypes) => {
           <AvatarFallback>Admin</AvatarFallback>
         </Avatar>
         <div>
-          <TypographyH5>MohamedAmine</TypographyH5>
+          <TypographyH5>{user?.name}</TypographyH5>
           <TypographySmall>Cardiologist</TypographySmall>
         </div>
         <div>

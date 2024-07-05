@@ -4,7 +4,7 @@ import Heading from "@/components/ui/heading";
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import BeatLoader from "react-spinners/BeatLoader";
 import { getPatientById, postConsultation } from "@/api/api";
@@ -15,6 +15,7 @@ import { createMarkup } from "@/utils/CreateMarkup";
 function ConsulationPage() {
   const { patientId, appointmentId } = useParams();
   const user = useSelector(getUser);
+  const navigate = useNavigate();
 
   const { data } = useQuery(`getUser${patientId}`, () =>
     getPatientById(patientId)
@@ -25,14 +26,20 @@ function ConsulationPage() {
   const [value, setValue] = useState("");
   const date = new Date();
 
-  const { mutate, isLoading: loading } = useMutation(() =>
-    postConsultation({
-      patientId,
-      doctorId: user?.user?.doctor?.id,
-      medicalFileId: patient?.MedicalFile?.id,
-      instructions: value,
-      appointmentId,
-    })
+  const { mutate, isLoading: loading } = useMutation(
+    () =>
+      postConsultation({
+        patientId,
+        doctorId: user?.user?.doctor?.id,
+        medicalFileId: patient?.MedicalFile?.id,
+        instructions: value,
+        appointmentId,
+      }),
+    {
+      onSuccess: () => {
+        navigate(`/patient/${patient?.id}`);
+      },
+    }
   );
   return (
     <div>

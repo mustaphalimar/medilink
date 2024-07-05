@@ -6,6 +6,8 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import RequestsTable from "./RequestsTable";
 import { TableSkeleton } from "@/components/ui/TableSkeleton";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
 
 const RequestsScreen = () => {
   const user = useSelector(getUser);
@@ -33,7 +35,9 @@ const RequestsScreen = () => {
         {isLoading ? (
           <TableSkeleton />
         ) : (
-          <RequestsTable data={data?.data} refetch={refetch} />
+          <div>
+            <DataTable columns={columns(refetch)} data={data?.data} />
+          </div>
         )}
       </div>
     </div>

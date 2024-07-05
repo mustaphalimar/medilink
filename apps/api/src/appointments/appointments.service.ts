@@ -109,7 +109,11 @@ export class AppointmentsService {
         status: 'PENDING',
       },
       include: {
-        patient: true,
+        patient: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
   }

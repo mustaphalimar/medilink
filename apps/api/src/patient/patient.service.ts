@@ -59,4 +59,25 @@ export class PatientService {
       },
     });
   }
+
+  async getPendingAppointments(id: string) {
+    return await this.databaseService.appointment.findMany({
+      where: { AND: { patientId: id, status: 'PENDING' } },
+      include: { doctor: { select: { user: { select: { name: true } } } } },
+    });
+  }
+
+  async getScheduledAppointments(id: string) {
+    return await this.databaseService.appointment.findMany({
+      where: { AND: { patientId: id, status: 'SCHEDULED' } },
+      include: { doctor: { select: { user: { select: { name: true } } } } },
+    });
+  }
+
+  async getCompletedAppointments(id: string) {
+    return await this.databaseService.appointment.findMany({
+      where: { AND: { patientId: id, status: 'DONE' } },
+      include: { doctor: { select: { user: { select: { name: true } } } } },
+    });
+  }
 }

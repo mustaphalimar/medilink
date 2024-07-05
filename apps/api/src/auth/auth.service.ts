@@ -21,6 +21,7 @@ export class AuthService {
       where: { email: email },
       include: {
         doctor: true,
+        patient: true,
       },
     });
 

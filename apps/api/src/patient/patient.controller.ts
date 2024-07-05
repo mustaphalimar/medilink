@@ -20,6 +20,24 @@ export class PatientController {
     return this.patientService.getPatientById(id);
   }
 
+  // get pending appointments
+  @Get('my-appointments/pending/:id')
+  getPendingAppointments(@Param('id') id: string) {
+    return this.patientService.getPendingAppointments(id);
+  }
+
+  // get scheduled appointments
+  @Get('my-appointments/scheduled/:id')
+  getScheduledAppointments(@Param('id') id: string) {
+    return this.patientService.getScheduledAppointments(id);
+  }
+
+  // get completed appointments
+  @Get('my-appointments/completed/:id')
+  getCompletedAppointments(@Param('id') id: string) {
+    return this.patientService.getCompletedAppointments(id);
+  }
+
   @Patch('/medical-file/:id')
   update(
     @Param('id') id: string,

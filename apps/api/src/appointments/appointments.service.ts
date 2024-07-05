@@ -119,7 +119,11 @@ export class AppointmentsService {
         status: 'SCHEDULED',
       },
       include: {
-        patient: true,
+        patient: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
   }

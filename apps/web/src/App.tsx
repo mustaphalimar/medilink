@@ -3,7 +3,7 @@ import PrivateLayout from "./Layout/privateLayout";
 import NotFoundPage from "./screens/notFoundPage";
 import OverviewScreen from "./screens/OverviewScreen";
 import PatientsScreen from "./screens/patients/PatientsScreen";
-import AppointementsScreen from "./screens/appointements";
+import AppointementsScreen from "./screens/appointements/AppointementsScreen";
 import AdminsScreen from "./screens/admins/AdminsScreen";
 import Login from "./screens/Login";
 import RequestsScreen from "./screens/requests/RequestsScreen";

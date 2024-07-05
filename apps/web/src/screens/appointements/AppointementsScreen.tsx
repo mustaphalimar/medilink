@@ -1,15 +1,13 @@
 import Heading from "@/components/ui/heading";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
+import { TableSkeleton } from "@/components/ui/TableSkeleton";
 import { useSelector } from "react-redux";
 import { getUser } from "@/features/user/userSlice";
 import { useQuery } from "react-query";
 import axios from "axios";
-import TodaysPatientTable from "./TodaysPatientTable";
 
-import { TableSkeleton } from "@/components/ui/TableSkeleton";
-import { DataTable } from "./data-table";
-import { columns } from "./columns";
-
-const TodaysPatientScreen = () => {
+const AppointementsScreen = () => {
   const user = useSelector(getUser);
   const { data, isLoading } = useQuery("getRequestsScheduled", async () => {
     try {
@@ -20,24 +18,20 @@ const TodaysPatientScreen = () => {
       throw new Error(error);
     }
   });
-
   return (
     <div>
-      <Heading
-        title="Today's Patients"
-        description="Manage Today's Appointements"
-      />
+      <Heading title="Appointments" description="Manage Appointements" />
 
       <div className="mt-10 space-y-6 ">
         {/* <div className="grid w-full max-w-sm items-center gap-1.5 relative">
-          <Input
-            type="text"
-            id="search"
-            placeholder="Search Admins "
-            className="pr-8"
-          />
-          <Search className="absolute right-2 text-gray-500" size={18} />
-        </div> */}
+      <Input
+        type="text"
+        id="search"
+        placeholder="Search Admins "
+        className="pr-8"
+      />
+      <Search className="absolute right-2 text-gray-500" size={18} />
+    </div> */}
         {isLoading ? (
           <TableSkeleton />
         ) : (
@@ -49,4 +43,4 @@ const TodaysPatientScreen = () => {
   );
 };
 
-export default TodaysPatientScreen;
+export default AppointementsScreen;

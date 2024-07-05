@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { getUser } from "@/features/user/userSlice";
 import { useQuery } from "react-query";
 import axios from "axios";
-import TodaysPatientTable from "./TodaysPatientTable";
-
 import { TableSkeleton } from "@/components/ui/TableSkeleton";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";

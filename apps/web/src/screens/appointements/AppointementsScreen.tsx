@@ -12,7 +12,7 @@ const AppointementsScreen = () => {
   const { data, isLoading } = useQuery("getRequestsScheduled", async () => {
     try {
       return await axios(
-        `http://localhost:4000/appointments/my-appointments/scheduled/${user?.user?.doctor?.id}`
+        `http://localhost:4000/appointments/my-appointments/scheduled-done/${user?.user?.doctor?.id}`
       );
     } catch (error: any) {
       throw new Error(error);

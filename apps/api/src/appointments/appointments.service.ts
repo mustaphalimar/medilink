@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
+import { startOfDay, endOfDay } from 'date-fns';
 
 @Injectable()
 export class AppointmentsService {
@@ -112,11 +113,38 @@ export class AppointmentsService {
       },
     });
   }
+
+  async getScheduledDoneAppointmentsByDoctor(id: string) {
+    return this.databaseService.appointment.findMany({
+      where: {
+        doctorId: id,
+        status: {
+          in: ['SCHEDULED', 'DONE'],
+        },
+      },
+      include: {
+        patient: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+  }
+
   async getScheduledAppointmentsByDoctor(id: string) {
+    const today = new Date();
+    const startOfToday = startOfDay(today);
+    const endOfToday = endOfDay(today);
+
     return this.databaseService.appointment.findMany({
       where: {
         doctorId: id,
         status: 'SCHEDULED',
+        AND: [
+          { date: { gte: startOfToday.toISOString() } },
+          { date: { lt: endOfToday.toISOString() } },
+        ],
       },
       include: {
         patient: {

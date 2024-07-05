@@ -47,17 +47,19 @@ export const columns = [
 
   {
     accessorKey: "status",
-    header: "Status",
+
+    header: ({ column }: { column: any }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
-  // {
-  //   // accessorKey: ({ row }: { row: any }) => {
-  //   //   return `${row?.height}cm | ${row?.weight}kg`;
-  //   // },
-  //   header: "Patient Height & Weight",
-  //   cell: ({ row }: { row: any }) => {
-  //     return `${row?.original?.patient?.height}cm | ${row?.original?.patient?.weight}kg`;
-  //   },
-  // },
 
   {
     id: "actions",
@@ -74,16 +76,18 @@ export const columns = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className="space-x-2"
-              onClick={() => {
-                navigate(
-                  `/consultation/${row?.original.patientId}/${row?.original.id}`
-                );
-              }}
-            >
-              <span>Create Consultation</span> <PencilIcon size={20} />
-            </DropdownMenuItem>
+            {row?.original?.status == "DONE" || (
+              <DropdownMenuItem
+                className="space-x-2"
+                onClick={() => {
+                  navigate(
+                    `/consultation/${row?.original.patientId}/${row?.original.id}`
+                  );
+                }}
+              >
+                <span>Create Consultation</span> <PencilIcon size={20} />
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem
               className="space-x-2"
               onClick={() => {

@@ -27,6 +27,11 @@ export class AppointmentsController {
     return this.appointmentsService.getAppointmentsByDoctor(id);
   }
 
+  @Get('my-appointments/scheduled-done/:id')
+  getScheduledDoneAppointmentsByDoctor(@Param('id') id: string) {
+    return this.appointmentsService.getScheduledDoneAppointmentsByDoctor(id);
+  }
+
   @Get('my-appointments/scheduled/:id')
   getScheduledAppointmentsByDoctor(@Param('id') id: string) {
     return this.appointmentsService.getScheduledAppointmentsByDoctor(id);

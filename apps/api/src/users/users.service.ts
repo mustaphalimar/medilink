@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 import * as bcrypt from 'bcrypt';
@@ -10,6 +14,14 @@ export class UsersService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async create(createUserDto: Prisma.UserCreateInput) {
+    const existingUser = await this.databaseService.user.findFirst({
+      where: {
+        email: createUserDto.email,
+      },
+    });
+
+    if (existingUser) throw new BadRequestException('Email already exists!');
+
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       roundsOfHashing,
@@ -17,7 +29,7 @@ export class UsersService {
 
     createUserDto.password = hashedPassword;
 
-    const user = await this.databaseService.user.create({
+    let user = await this.databaseService.user.create({
       data: createUserDto,
       include: {
         patient: true,
@@ -57,6 +69,15 @@ export class UsersService {
         },
       });
     }
+
+    user = await this.databaseService.user.findUnique({
+      where: {
+        email: user.email,
+      },
+      include: {
+        patient: true,
+      },
+    });
 
     return user;
   }

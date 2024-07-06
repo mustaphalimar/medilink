@@ -15,7 +15,7 @@ function ConsultationDisplay({
   consultations: Consultation[];
 }) {
   return (
-    <div className="col-start-1 row-span-7 col-span-8 space-y-4 border shadow-md p-6 rounded-lg">
+    <div className="col-start-1 row-span-7 col-span-8 space-y-4 border shadow-sm p-6 rounded-lg">
       <h3 className="text-xl font-semibold  flex items-center space-x-2 pb-4">
         <span>
           <FileClock size={20} />

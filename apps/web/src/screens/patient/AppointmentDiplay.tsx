@@ -4,7 +4,7 @@ import { CalendarClock } from "lucide-react";
 
 function AppointmentDisplay({ appointments }: { appointments: Appointment[] }) {
   return (
-    <div className="space-y-2 border shadow-md p-6 rounded-lg">
+    <div className="space-y-2 border shadow-sm p-6 rounded-lg">
       <h3 className="text-xl font-semibold  flex items-center space-x-2 pb-4">
         <span>
           <CalendarClock size={20} />

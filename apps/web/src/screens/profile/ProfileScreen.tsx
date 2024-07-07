@@ -1,63 +1,42 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import Heading from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { Calendar, MapPin, PhoneCall } from "lucide-react";
+import PersonalInformation from "./PersonalInformation";
 
 const ProfileScreen = () => {
-  const [toggleEdit, setToggleEdit] = useState(true);
-
   return (
     <div>
-      <Heading title="MohamedAmine Azirgui" description="Cardiologist" />
-
-      <div className="mt-10 space-y-6 ">
-        {/* profile info display */}
-        <div className="w-1/3 space-y-4">
-          <div className="space-y-4 ">
-            <Avatar className="w-36 h-36">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>Profile Picture</AvatarFallback>
-            </Avatar>
-            <div>
-              <Button variant={"outline"} size={"sm"}>
-                Change Avatar
-              </Button>
-            </div>
-          </div>
+      <div className="h-[200px] w-full bg-neutral-100 rounded-lg" />
+      <div className="-mt-10 flex items-end space-x-8 px-10">
+        <div className="bg-white p-2 rounded-full">
+          <Avatar className="w-36 h-36 ">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>Profile Picture</AvatarFallback>
+          </Avatar>
+        </div>
+        <div className="space-y-6">
           <div>
-            <Label>Full Name</Label>
-            <Input value={"MohamedAmine Azirgui"} disabled={toggleEdit} />
+            <h3 className="scroll-m-20 text-3xl font-semibold tracking-tight">
+              Dr.MohamedAmine Azirgui
+            </h3>
+            <p className="text-neutral-600">Cardiologist</p>
           </div>
-
-          <div>
-            <Label>Email</Label>
-            <Input
-              type="email"
-              value={"MedAmine@test.com"}
-              disabled={toggleEdit}
-            />
-          </div>
-
-          <div>
-            <Label>Password</Label>
-            <Input type="password" value={"something"} disabled={toggleEdit} />
-          </div>
-
-          <div className="space-x-4">
-            <Button
-              onClick={() => setToggleEdit(false)}
-              size={"sm"}
-              variant={"secondary"}
-            >
-              Edit
-            </Button>
-            <Button onClick={() => setToggleEdit(true)} size={"sm"}>
-              Save Changes
-            </Button>
+          <div className=" text-sm flex items-center space-x-4">
+            <p className="flex items-center space-x-2 text-neutral-500">
+              <PhoneCall size={18} /> <span>+212 622002200</span>
+            </p>
+            <p className="flex items-center space-x-2 text-neutral-500">
+              <MapPin size={18} />{" "}
+              <span>avenue Hassan II, 3°et., Grand Casablanca</span>
+            </p>
+            <p className="flex items-center space-x-2 text-neutral-500">
+              <Calendar size={18} /> <span>Joined April 2024</span>
+            </p>
           </div>
         </div>
+      </div>
+
+      <div className="mt-10">
+        <PersonalInformation />
       </div>
     </div>
   );

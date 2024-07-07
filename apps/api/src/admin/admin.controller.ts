@@ -9,10 +9,14 @@ import {
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Prisma } from '@prisma/client';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('admin')
 export class AdminController {
-  constructor(private readonly adminService: AdminService) {}
+  constructor(
+    private readonly adminService: AdminService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post(':doctorId')
   create(
@@ -37,7 +41,7 @@ export class AdminController {
     @Param('id') id: string,
     @Body() updateAdminDto: Prisma.UserUpdateInput,
   ) {
-    return this.adminService.update(id, updateAdminDto);
+    return this.usersService.update(id, updateAdminDto);
   }
 
   @Delete(':id')

@@ -35,3 +35,75 @@ export const appointementDone = async (id: string | undefined) => {
     throw new Error(error);
   }
 };
+
+//Admin
+export const getAdmins = async (id: string | undefined) => {
+  try {
+    return await axios(`${url}/admin/${id}`);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const createAdmin = async (data: {
+  doctorId: string | undefined;
+  name: string | undefined;
+  email: string | undefined;
+  password: string | undefined;
+}) => {
+  try {
+    const dataToSend = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: "ADMIN",
+    };
+    const newAdmin = await axios(`${url}/admin/${data.doctorId}`, {
+      method: "POST",
+      data: dataToSend,
+    });
+    console.log(newAdmin);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const updateAdmin = async (data: {
+  adminId: string | undefined;
+  name: string | undefined;
+  email: string | undefined;
+  password?: string | undefined;
+}) => {
+  try {
+    let dataToSend = {};
+    if (data.password?.length && data.password?.length > 0) {
+      dataToSend = {
+        name: data.name,
+        email: data.email,
+        password: data?.password,
+      };
+    } else {
+      dataToSend = {
+        name: data.name,
+        email: data.email,
+      };
+    }
+
+    return await axios(`${url}/admin/${data.adminId}`, {
+      method: "PATCH",
+      data: dataToSend,
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const deleteAdmin = async (id: string | undefined) => {
+  try {
+    return await axios(`${url}/admin/${id}`, {
+      method: "DELETE",
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

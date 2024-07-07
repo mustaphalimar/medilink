@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogClose,
@@ -10,9 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useMutation } from "react-query";
-import { createAdmin } from "@/api/api";
-import { useSelector } from "react-redux";
-import { getUser } from "@/features/user/userSlice";
+import { updateAdmin } from "@/api/api";
 import { z } from "zod";
 import {
   Form,
@@ -27,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import BeatLoader from "react-spinners/BeatLoader";
 import { toast } from "sonner";
+import { Pencil } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(5, {
@@ -35,26 +33,29 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Must be a valid email",
   }),
-  password: z.string().min(6, {
-    message: "Password must contain at least 6 characters",
-  }),
+  password: z.string().optional(),
 });
 
-const AdminForm = ({ refetch }: { refetch: any }) => {
-  const user = useSelector(getUser);
-
+const AdminFormEdit = ({
+  adminData,
+  refetch,
+}: {
+  adminData: any;
+  refetch: any;
+}) => {
   const { mutate, isLoading, error } = useMutation(
     async (data: {
-      doctorId: string | undefined;
+      adminId: string | undefined;
       name: string | undefined;
       email: string | undefined;
-      password: string | undefined;
+      password?: string | undefined;
     }) => {
-      createAdmin(data);
+      updateAdmin(data);
     },
+
     {
       onSuccess: () => {
-        toast.info("Admin has been added");
+        toast.info("Admin has been Edited");
         refetch();
       },
     }
@@ -63,14 +64,14 @@ const AdminForm = ({ refetch }: { refetch: any }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      name: adminData?.user?.name,
+      email: adminData?.user?.email,
       password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const data = { ...values, doctorId: user?.user?.doctor?.id as string };
+    const data = { ...values, adminId: adminData?.user?.id };
     mutate(data);
     if (error) {
       console.log(error);
@@ -80,11 +81,13 @@ const AdminForm = ({ refetch }: { refetch: any }) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button>Add Admin</Button>
+        <Button size={"sm"} className="space-x-2">
+          <span>Edit</span> <Pencil size={20} />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Admin Form</DialogTitle>
+          <DialogTitle>Admin Edit Form</DialogTitle>
         </DialogHeader>
         <div className="my-6 space-y-8">
           <Form {...form}>
@@ -141,7 +144,7 @@ const AdminForm = ({ refetch }: { refetch: any }) => {
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter admin account password
+                      *If you don't want to update the password leave it blank
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -164,4 +167,4 @@ const AdminForm = ({ refetch }: { refetch: any }) => {
   );
 };
 
-export default AdminForm;
+export default AdminFormEdit;

@@ -1,21 +1,40 @@
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { ArrowUpDown, Trash } from "lucide-react";
+import { useMutation } from "react-query";
+import { deleteAdmin } from "@/api/api";
+import AdminFormEdit from "./AdminFormEdit";
 
-export const columns = [
+export const columns = (refetch: any) => [
   {
-    accessorKey: "id",
-    header: "Status",
+    id: "name",
+    accessorKey: "user.name",
+    header: ({ column }: { column: any }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Full Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
-    accessorKey: "email",
+    id: "email",
+    accessorKey: "user.email",
     header: ({ column }: { column: any }) => {
       return (
         <Button
@@ -28,35 +47,53 @@ export const columns = [
       );
     },
   },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
+
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }: { row: any }) => {
-      const payment = 12;
-
+      const id = row?.original?.id;
+      const adminDelete = useMutation(
+        `deleteAdmin${id}`,
+        async (id: string) => deleteAdmin(id),
+        {
+          onSuccess: () => {
+            toast.info("Admin has been deleted");
+            refetch();
+          },
+        }
+      );
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText("12")}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-2 flex-wrap">
+          <AdminFormEdit adminData={row?.original} refetch={refetch} />
+
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <Button size={"sm"} variant={"destructive"} className="space-x-2">
+                <span>Delete</span> <Trash size={20} />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the
+                  appointment and remove it from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={() => {
+                    adminDelete?.mutate(id);
+                  }}
+                >
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       );
     },
   },

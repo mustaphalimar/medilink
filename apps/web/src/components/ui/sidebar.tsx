@@ -38,13 +38,13 @@ const Sidebar = ({ isOpen }: SideBarTypes) => {
       {isOpen ? (
         <div className="mx-4 text-primary pb-4 ">
           <Link to={"/"}>
-            <h1 className="text-5xl font-black italic">MediLink.</h1>
+            <h1 className="text-5xl font-extrabold ">MediLink.</h1>
           </Link>
         </div>
       ) : (
         <div className="text-center text-primary pb-4">
           <Link to={"/"}>
-            <h1 className="text-5xl font-black italic">M</h1>
+            <h1 className="text-5xl font-extrabold ">M</h1>
           </Link>
         </div>
       )}

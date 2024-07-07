@@ -65,12 +65,12 @@ export class AdminService {
     });
   }
 
-  async update(id: string, updateAdminDto: Prisma.UserUpdateInput) {
-    return await this.databaseService.user.update({
-      where: { id },
-      data: updateAdminDto,
-    });
-  }
+  // async update(id: string, updateAdminDto: Prisma.UserUpdateInput) {
+  //   return await this.databaseService.user.update({
+  //     where: { id },
+  //     data: updateAdminDto,
+  //   });
+  // }
 
   async remove(id: string) {
     const admin = await this.databaseService.admin.delete({

@@ -54,7 +54,7 @@ const ProfileScreen = () => {
               <span>+212 {user?.doctor?.phoneNumber}</span>
             </p>
             <p className="flex items-center space-x-2 text-neutral-500">
-              <MapPin size={18} /> <span>{user?.doctor?.adress}</span>
+              <MapPin size={18} /> <span>{user?.doctor?.address}</span>
             </p>
             <p className="flex items-center space-x-2 text-neutral-500">
               <Calendar size={18} /> <span>Joined {dateJoined}</span>

@@ -121,7 +121,7 @@ export const updateDoctorProfile = async (data: {
   doctorId: string | undefined;
   name: string | undefined;
   speciality: string | undefined;
-  adress: string | undefined;
+  address: string | undefined;
   phoneNumber: string | undefined;
   cred: {
     userId: string;
@@ -135,7 +135,7 @@ export const updateDoctorProfile = async (data: {
       dataToSend = {
         name: data.name,
         speciality: data.speciality,
-        adress: data.adress,
+        address: data.address,
         phoneNumber: data.phoneNumber,
         cred: {
           userId: data.cred.userId,
@@ -147,7 +147,7 @@ export const updateDoctorProfile = async (data: {
       dataToSend = {
         name: data.name,
         speciality: data.speciality,
-        adress: data.adress,
+        address: data.address,
         phoneNumber: data.phoneNumber,
         cred: {
           userId: data.cred.userId,

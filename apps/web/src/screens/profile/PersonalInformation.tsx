@@ -24,7 +24,7 @@ import { toast } from "sonner";
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   speciality: z.string().min(2).max(50),
-  adress: z.string().min(2).max(50),
+  address: z.string().min(2).max(50),
   phoneNumber: z.string().min(9).max(9),
   email: z.string().email({
     message: "enter a valid email",
@@ -43,7 +43,7 @@ function PersonalInformation({ refetchUser }: { refetchUser: any }) {
     defaultValues: {
       name: user?.doctor?.name,
       speciality: user?.doctor?.speciality,
-      adress: user?.doctor?.adress,
+      address: user?.doctor?.address,
       phoneNumber: user?.doctor?.phoneNumber,
       email: user?.email,
       password: "",
@@ -60,7 +60,7 @@ function PersonalInformation({ refetchUser }: { refetchUser: any }) {
       name: values.name,
       speciality: values.speciality,
       phoneNumber: values.phoneNumber,
-      adress: values.adress,
+      address: values.address,
       doctorId: user?.doctor?.id,
       cred: {
         userId: user?.id,
@@ -77,7 +77,7 @@ function PersonalInformation({ refetchUser }: { refetchUser: any }) {
       doctorId: any;
       name: string;
       speciality: string;
-      adress: string;
+      address: string;
       phoneNumber: string;
       cred: {
         userId: string;
@@ -188,12 +188,12 @@ function PersonalInformation({ refetchUser }: { refetchUser: any }) {
               <FormField
                 disabled={isEdit}
                 control={form.control}
-                name="adress"
+                name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Adress</FormLabel>
+                    <FormLabel>address</FormLabel>
                     <FormControl>
-                      <Input placeholder="Adress" {...field} />
+                      <Input placeholder="address" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

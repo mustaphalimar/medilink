@@ -10,7 +10,7 @@ const OverviewScreen = () => {
   return (
     <div>
       <div className="pb-6">
-        <TypographyH3>Welcome, Dr.{user?.name}</TypographyH3>
+        <TypographyH3>Welcome, Dr.{user?.doctor?.name}</TypographyH3>
         <TypographySmall>Have a nice day at work</TypographySmall>
       </div>
 

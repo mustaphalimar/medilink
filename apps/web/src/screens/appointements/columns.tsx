@@ -10,6 +10,7 @@ import {
 import { formatDate } from "@/utils/FormatDate";
 import { ArrowUpDown, EyeIcon, MoreHorizontal, PencilIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { transformDate } from "./data-table";
 
 export const columns = [
   {
@@ -28,6 +29,7 @@ export const columns = [
     },
   },
   {
+    id: "date",
     accessorKey: "date",
     header: ({ column }: { column: any }) => {
       return (
@@ -42,6 +44,10 @@ export const columns = [
     },
     cell: ({ row }: { row: any }) => {
       return formatDate(row?.original?.date);
+    },
+    filter: {
+      type: "text",
+      transform: (value: string) => transformDate(value),
     },
   },
 

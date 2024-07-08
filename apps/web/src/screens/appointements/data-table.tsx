@@ -12,7 +12,16 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+
 import { Input } from "@/components/ui/input";
+
+import { Calendar } from "@/components/ui/calendar";
 
 import {
   DropdownMenu,
@@ -29,16 +38,35 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+}
+export function transformDate(initialDateString: string) {
+  let initialDate = new Date(initialDateString);
+  // Create a new date object in UTC
+  let utcDate = new Date(
+    Date.UTC(
+      initialDate.getUTCFullYear(),
+      initialDate.getUTCMonth(),
+      initialDate.getUTCDate()
+    )
+  );
+  // Add one day to the date
+  utcDate.setUTCDate(utcDate.getUTCDate() + 1);
+  // Return the date in ISO format without time
+  return utcDate.toISOString().split("T")[0];
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [dateFilter, setDateFilter] = React.useState<Date | undefined>("");
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -75,6 +103,39 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <div className="px-4">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[240px] pl-3 text-left font-normal",
+                  !dateFilter && "text-muted-foreground"
+                )}
+              >
+                {dateFilter ? (
+                  format(dateFilter, "PPP")
+                ) : (
+                  <span>Pick a date</span>
+                )}
+                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={dateFilter}
+                onSelect={(event) => {
+                  setDateFilter(event);
+                  console.log(transformDate(event));
+
+                  table.getColumn("date")?.setFilterValue(transformDate(event));
+                }}
+                className="rounded-md border"
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

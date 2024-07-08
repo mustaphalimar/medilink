@@ -6,6 +6,7 @@ export function formatDate(dateString: string) {
     weekday: "long", // "Friday"
     year: "numeric", // "2024"
     month: "short", // "Sept"
+    day: "numeric",
     hour: "numeric", // "08"
     minute: "numeric", // "23"
     hour12: true, // Use 12-hour time format

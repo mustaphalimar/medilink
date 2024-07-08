@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <div className="px-4">
+        <div className="px-4 space-x-2">
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -127,7 +127,6 @@ export function DataTable<TData, TValue>({
                 selected={dateFilter}
                 onSelect={(event) => {
                   setDateFilter(event);
-                  console.log(transformDate(event));
 
                   table.getColumn("date")?.setFilterValue(transformDate(event));
                 }}
@@ -135,6 +134,15 @@ export function DataTable<TData, TValue>({
               />
             </PopoverContent>
           </Popover>
+          <Button
+            onClick={() => {
+              setDateFilter("");
+              table.getColumn("date")?.setFilterValue("");
+            }}
+            variant="outline"
+          >
+            Clear Filter
+          </Button>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

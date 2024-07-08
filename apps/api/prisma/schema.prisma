@@ -36,7 +36,7 @@ model Doctor {
   user         User           @relation(fields: [userId], references: [id])
   userId       String         @unique
   name         String?
-  adress       String?
+  address      String?
   speciality   String?
   phoneNumber  String?
   createdAt    DateTime       @default(now()) @db.Timestamptz(3)

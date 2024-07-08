@@ -37,7 +37,7 @@ export class DoctorController {
     udpateDoctor: {
       name: string | undefined;
       speciality: string | undefined;
-      adress: string | undefined;
+      address: string | undefined;
       phoneNumber: string | undefined;
       cred: {
         userId: string;

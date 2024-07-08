@@ -15,10 +15,14 @@ function AppointmentDisplay({ appointments }: { appointments: Appointment[] }) {
       <div className="space-y-4">
         {appointments?.map((app) => {
           return (
-            <div className="grid grid-cols-3 gap-4 py-2 border-b">
+            <div className="grid grid-cols-4 gap-4 py-2 border-b">
               <div className="text-lg  capitalize">
                 <span className="font-medium">Doctor:</span>{" "}
-                <span>{app.doctor.user.name}</span>
+                <span>{app.doctor?.name}</span>
+              </div>
+              <div className="text-lg  capitalize">
+                <span className="font-medium">Speciality:</span>{" "}
+                <span>{app.doctor?.speciality}</span>
               </div>
               <div className="text-lg  capitalize">
                 <span className="font-medium">Date:</span>{" "}

@@ -35,8 +35,8 @@ const TopBar = ({ isOpen, setIsOpen, user }: SideBarTypes) => {
           <AvatarFallback>Admin</AvatarFallback>
         </Avatar>
         <div>
-          <TypographyH5>{user?.name}</TypographyH5>
-          <TypographySmall>Cardiologist</TypographySmall>
+          <TypographyH5>{user?.doctor?.name}</TypographyH5>
+          <TypographySmall>{user?.doctor?.speciality}</TypographySmall>
         </div>
         <div>
           <DropdownMenu>

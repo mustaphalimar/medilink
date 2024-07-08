@@ -7,9 +7,8 @@ export type Consultation = {
   createdAt: string;
   appointmentId: string;
   doctor: {
-    user: {
-      name: string;
-    };
+    name: string;
+    speciality: string;
   };
 };
 
@@ -20,8 +19,7 @@ export type Appointment = {
   date: string;
   status: string;
   doctor: {
-    user: {
-      name: string;
-    };
+    name: string;
+    speciality: string;
   };
 };

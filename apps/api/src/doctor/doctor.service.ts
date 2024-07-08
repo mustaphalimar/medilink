@@ -64,4 +64,13 @@ export class DoctorService {
       },
     });
   }
+
+  async updaeDoctorInfo(id: string, updateDoctor: Prisma.DoctorUpdateInput) {
+    return await this.databaseService.doctor.update({
+      where: {
+        id,
+      },
+      data: updateDoctor,
+    });
+  }
 }

@@ -1,6 +1,14 @@
 import axios from "axios";
 const url = "http://localhost:4000";
 
+export const getSignleUser = async (userId: string | undefined) => {
+  try {
+    return await axios(`${url}/users/${userId}`);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const getPatientById = async (patientId: string | undefined) => {
   try {
     return await axios(`${url}/patient/${patientId}`);
@@ -102,6 +110,54 @@ export const deleteAdmin = async (id: string | undefined) => {
   try {
     return await axios(`${url}/admin/${id}`, {
       method: "DELETE",
+    });
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+//doctor profile update
+export const updateDoctorProfile = async (data: {
+  doctorId: string | undefined;
+  name: string | undefined;
+  speciality: string | undefined;
+  adress: string | undefined;
+  phoneNumber: string | undefined;
+  cred: {
+    userId: string;
+    email: string | undefined;
+    password?: string | undefined;
+  };
+}) => {
+  try {
+    let dataToSend = {};
+    if (data.cred.password?.length && data.cred.password?.length > 0) {
+      dataToSend = {
+        name: data.name,
+        speciality: data.speciality,
+        adress: data.adress,
+        phoneNumber: data.phoneNumber,
+        cred: {
+          userId: data.cred.userId,
+          email: data.cred.email,
+          password: data?.cred.password,
+        },
+      };
+    } else {
+      dataToSend = {
+        name: data.name,
+        speciality: data.speciality,
+        adress: data.adress,
+        phoneNumber: data.phoneNumber,
+        cred: {
+          userId: data.cred.userId,
+          email: data.cred.email,
+        },
+      };
+    }
+    return await axios(`${url}/doctor/${data.doctorId}`, {
+      method: "PATCH",
+      data: dataToSend,
     });
   } catch (error: any) {
     throw new Error(error);

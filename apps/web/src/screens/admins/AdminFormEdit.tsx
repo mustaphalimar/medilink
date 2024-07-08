@@ -144,7 +144,8 @@ const AdminFormEdit = ({
                       />
                     </FormControl>
                     <FormDescription>
-                      *If you don't want to update the password leave it blank
+                      *If you don't want to update the password leave this field
+                      empty
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

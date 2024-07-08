@@ -87,7 +87,15 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return this.databaseService.user.findUnique({ where: { id } });
+    return this.databaseService.user.findUnique({
+      where: { id },
+      include: {
+        doctor: true,
+        patient: true,
+        superAdmin: true,
+        admin: true,
+      },
+    });
   }
 
   async update(id: string, updateUserDto: Prisma.UserUpdateInput) {

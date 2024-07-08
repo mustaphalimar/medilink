@@ -28,7 +28,7 @@ function ConsultationDisplay({
           <AccordionItem value={`item-${cons.id}`} key={index}>
             <AccordionTrigger className="capitalize">
               <div>
-                Doctor {cons.doctor.user.name}{" "}
+                Doctor {cons.doctor.name}{" "}
                 <span className="italic text-neutral-500 font-normal">
                   on {formatDate(cons.createdAt)}
                 </span>

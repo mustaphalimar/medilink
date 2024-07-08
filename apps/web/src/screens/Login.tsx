@@ -78,8 +78,9 @@ const Login = () => {
           <div>
             <TypographyH1>MediLink</TypographyH1>
             <TypographyP>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              in magnam explicabo
+              Log in to manage patient appointments, access medical records, and
+              collaborate with other healthcare professionals in a secure and
+              efficient environment.
             </TypographyP>
           </div>
 
@@ -125,12 +126,8 @@ const Login = () => {
                 )}
               />
 
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? (
-                  <BeatLoader color="#36d7b7" size={10} />
-                ) : (
-                  "Submit"
-                )}
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? <BeatLoader color="#36d7b7" size={10} /> : "Login"}
               </Button>
             </form>
           </Form>

@@ -35,6 +35,11 @@ model Doctor {
   id           String         @id @default(uuid())
   user         User           @relation(fields: [userId], references: [id])
   userId       String         @unique
+  name         String?
+  adress       String?
+  speciality   String?
+  phoneNumber  String?
+  createdAt    DateTime       @default(now()) @db.Timestamptz(3)
   admins       Admin[]
   patients     Patient[]
   Appointment  Appointment[]

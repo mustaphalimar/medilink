@@ -10,12 +10,14 @@ import {
 import { DoctorService } from './doctor.service';
 import { Prisma } from '@prisma/client';
 import { AppointmentsService } from 'src/appointments/appointments.service';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('doctor')
 export class DoctorController {
   constructor(
     private readonly doctorService: DoctorService,
     private readonly appointmentsService: AppointmentsService,
+    private readonly usersService: UsersService,
   ) {}
 
   @Get()
@@ -26,6 +28,31 @@ export class DoctorController {
   @Get('/:id')
   getDoctorById(id: string) {
     return this.doctorService.getDoctorById(id);
+  }
+
+  @Patch('/:id')
+  async updateDoctorInfo(
+    @Param('id') id: string,
+    @Body()
+    udpateDoctor: {
+      name: string | undefined;
+      speciality: string | undefined;
+      adress: string | undefined;
+      phoneNumber: string | undefined;
+      cred: {
+        userId: string;
+        email: string | undefined;
+        password?: string | undefined;
+      };
+    },
+  ) {
+    const { cred } = udpateDoctor;
+    const userId = cred.userId;
+    delete udpateDoctor.cred.userId;
+
+    await this.usersService.update(userId, cred);
+    delete udpateDoctor.cred;
+    return this.doctorService.updaeDoctorInfo(id, udpateDoctor);
   }
 
   @Post('/create-consultation')

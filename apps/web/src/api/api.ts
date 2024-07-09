@@ -163,3 +163,11 @@ export const updateDoctorProfile = async (data: {
     throw new Error(error);
   }
 };
+
+export const getStats = async (doctorId: string | undefined) => {
+  try {
+    return await axios(`${url}/stats/${doctorId}`);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

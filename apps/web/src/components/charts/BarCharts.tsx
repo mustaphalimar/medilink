@@ -32,16 +32,20 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartsComponents() {
+export function BarChartsComponents({ appointments }: { appointments: any }) {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Appointments</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>
+          {" "}
+          {appointments &&
+            `${appointments[5]?.month} - ${appointments[0]?.month} 2024`}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={appointments}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
@@ -54,14 +58,14 @@ export function BarChartsComponents() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+            <Bar dataKey="total" fill="var(--color-desktop)" radius={8} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
+        {/* <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
+        </div> */}
         <div className="leading-none text-muted-foreground">
           Showing total appointments for the last 6 months
         </div>

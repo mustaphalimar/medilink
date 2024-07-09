@@ -1,15 +1,22 @@
 import { TypographyH3 } from "@/Typography/TypographyH3";
 import { TypographySmall } from "@/Typography/TypographySmall";
+import { getStats } from "@/api/api";
 import { BarChartsConsultation } from "@/components/charts/BarChartConsultation";
 import { BarChartsComponents } from "@/components/charts/BarCharts";
 import { PieGenderCharts } from "@/components/charts/PieGenderChart";
 import DisplayCard from "@/components/ui/displayCard";
 import { getUser } from "@/features/user/userSlice";
 import { Briefcase, Calendar, User, Video } from "lucide-react";
+import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 
 const OverviewScreen = () => {
   const { user } = useSelector(getUser);
+
+  const { data } = useQuery("getStats", () => getStats(user?.doctor?.id));
+
+  const stats = data?.data;
+
   return (
     <div>
       <div className="pb-6">
@@ -22,7 +29,7 @@ const OverviewScreen = () => {
           Icon={<Calendar />}
           styling="bg-[#7A6EFE]"
           title="Appointments"
-          count="24.4k"
+          count={stats?.appointments?.totalApp}
           key={"ho"}
         />
 
@@ -30,15 +37,15 @@ const OverviewScreen = () => {
           Icon={<User />}
           styling="bg-[#FF5363]"
           title="Total Patient"
-          count="166.3k"
+          count={stats?.patients[0]?.total + stats?.patients[1]?.total}
           key={"ho"}
         />
 
         <DisplayCard
           Icon={<Briefcase />}
           styling="bg-[#FFA901]"
-          title="Clinic Consulting"
-          count="53.6k"
+          title="Total Consulting"
+          count={stats?.consultations?.totalApp}
           key={"ho"}
         />
 
@@ -51,10 +58,16 @@ const OverviewScreen = () => {
         /> */}
       </div>
       <div className="py-20 grid grid-cols-1 lg:grid-cols-2  xl:grid-cols-3 gap-20">
-        <BarChartsComponents />
-        <PieGenderCharts />
+        {stats && (
+          <>
+            <BarChartsComponents appointments={stats?.appointments?.appStats} />
+            <PieGenderCharts patients={stats?.patients} />
 
-        <BarChartsConsultation />
+            <BarChartsConsultation
+              consultation={stats?.consultations?.consStats}
+            />
+          </>
+        )}
       </div>
     </div>
   );

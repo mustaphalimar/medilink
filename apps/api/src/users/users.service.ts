@@ -56,10 +56,10 @@ export class UsersService {
       const patient = await this.databaseService.patient.create({
         data: {
           userId: user.id,
-          gendre: 'male',
-          height: 180,
-          weight: 90,
-          age: 36,
+          gendre: 'female',
+          height: 160,
+          weight: 60,
+          age: 31,
         },
       });
 

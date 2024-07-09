@@ -33,24 +33,27 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function BarChartsConsultation() {
+export function BarChartsConsultation({ consultation }: { consultation: any }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Horizontal</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Consultations</CardTitle>
+        <CardDescription>
+          {consultation &&
+            `${consultation[5]?.month} - ${consultation[0]?.month} 2024`}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
-            data={chartData}
+            data={consultation}
             layout="vertical"
             margin={{
               left: -20,
             }}
           >
-            <XAxis type="number" dataKey="consultation" hide />
+            <XAxis type="number" dataKey="total" hide />
             <YAxis
               dataKey="month"
               type="category"
@@ -63,18 +66,11 @@ export function BarChartsConsultation() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar
-              dataKey="consultation"
-              fill="var(--color-consultation)"
-              radius={5}
-            />
+            <Bar dataKey="total" fill="var(--color-consultation)" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
         <div className="leading-none text-muted-foreground">
           Showing total consultation made for the last 6 months
         </div>

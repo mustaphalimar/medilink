@@ -27,6 +27,16 @@ export class AppointmentsController {
     return this.appointmentsService.getAppointmentsByDoctor(id);
   }
 
+  @Get('my-appointments/scheduled-done/:id')
+  getScheduledDoneAppointmentsByDoctor(@Param('id') id: string) {
+    return this.appointmentsService.getScheduledDoneAppointmentsByDoctor(id);
+  }
+
+  @Get('my-appointments/scheduled/:id')
+  getScheduledAppointmentsByDoctor(@Param('id') id: string) {
+    return this.appointmentsService.getScheduledAppointmentsByDoctor(id);
+  }
+
   @Post()
   create(@Body() createAppointmentDto: Prisma.AppointmentCreateInput) {
     return this.appointmentsService.create(createAppointmentDto);
@@ -42,9 +52,14 @@ export class AppointmentsController {
     return this.appointmentsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string) {
-    return this.appointmentsService.update(id);
+  @Patch('scheduled/:id')
+  updateScheduled(@Param('id') id: string) {
+    return this.appointmentsService.updateScheduled(id);
+  }
+
+  @Patch('done/:id')
+  updateDone(@Param('id') id: string) {
+    return this.appointmentsService.updateDone(id);
   }
 
   @Delete(':id')

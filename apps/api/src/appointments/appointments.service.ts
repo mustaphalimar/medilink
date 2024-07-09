@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
+import { startOfDay, endOfDay } from 'date-fns';
 
 @Injectable()
 export class AppointmentsService {
@@ -23,7 +24,7 @@ export class AppointmentsService {
     });
   }
 
-  async update(id: string) {
+  async updateScheduled(id: string) {
     const app = await this.databaseService.appointment.update({
       where: {
         id,
@@ -47,6 +48,17 @@ export class AppointmentsService {
     });
 
     return app;
+  }
+
+  async updateDone(id: string) {
+    return await this.databaseService.appointment.update({
+      where: {
+        id,
+      },
+      data: {
+        status: 'DONE',
+      },
+    });
   }
 
   async remove(id: string) {
@@ -94,6 +106,56 @@ export class AppointmentsService {
     return this.databaseService.appointment.findMany({
       where: {
         doctorId: id,
+        status: 'PENDING',
+      },
+      include: {
+        patient: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+  }
+
+  async getScheduledDoneAppointmentsByDoctor(id: string) {
+    return this.databaseService.appointment.findMany({
+      where: {
+        doctorId: id,
+        status: {
+          in: ['SCHEDULED', 'DONE'],
+        },
+      },
+      include: {
+        patient: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+  }
+
+  async getScheduledAppointmentsByDoctor(id: string) {
+    const today = new Date();
+    const startOfToday = startOfDay(today);
+    const endOfToday = endOfDay(today);
+
+    return this.databaseService.appointment.findMany({
+      where: {
+        doctorId: id,
+        status: 'SCHEDULED',
+        AND: [
+          { date: { gte: startOfToday.toISOString() } },
+          { date: { lt: endOfToday.toISOString() } },
+        ],
+      },
+      include: {
+        patient: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
   }

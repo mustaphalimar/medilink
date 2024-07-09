@@ -3,7 +3,7 @@ import PrivateLayout from "./Layout/privateLayout";
 import NotFoundPage from "./screens/notFoundPage";
 import OverviewScreen from "./screens/OverviewScreen";
 import PatientsScreen from "./screens/patients/PatientsScreen";
-import AppointementsScreen from "./screens/appointements";
+import AppointementsScreen from "./screens/appointements/AppointementsScreen";
 import AdminsScreen from "./screens/admins/AdminsScreen";
 import Login from "./screens/Login";
 import RequestsScreen from "./screens/requests/RequestsScreen";
@@ -12,6 +12,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import AuthRoute from "./utils/AuthRoute";
+import TodaysPatientScreen from "./screens/todaysPatient/TodaysPatientScreen";
+import { Toaster } from "./components/ui/sonner";
+import ConsulationPage from "./screens/consulation/ConsultationPage";
+import PatientProfile from "./screens/patient/PatientProfile";
 
 function App() {
   const queryClient = new QueryClient();
@@ -25,7 +29,16 @@ function App() {
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="/" element={<OverviewScreen />} />
                 <Route path="patients" element={<PatientsScreen />} />
-                <Route path="appointements" element={<AppointementsScreen />} />
+                <Route path="patient/:patientId" element={<PatientProfile />} />
+                <Route path="appointments" element={<AppointementsScreen />} />
+                <Route
+                  path="today-appointments"
+                  element={<TodaysPatientScreen />}
+                />
+                <Route
+                  path="consultation/:patientId/:appointmentId"
+                  element={<ConsulationPage />}
+                />
                 <Route path="admins" element={<AdminsScreen />} />
                 <Route path="requests" element={<RequestsScreen />} />
                 <Route path="myprofile" element={<ProfileScreen />} />
@@ -35,6 +48,7 @@ function App() {
           </Routes>
         </QueryClientProvider>
       </Provider>
+      <Toaster />
     </div>
   );
 }

@@ -6,10 +6,26 @@ import { DatabaseService } from 'src/database/database.service';
 export class DoctorService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  async getDoctors() {
+    return await this.databaseService.doctor.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+
   async getDoctorById(id: string) {
     return await this.databaseService.doctor.findFirst({
       where: {
         id: id,
+      },
+      include: {
+        user: true,
       },
     });
   }
@@ -32,7 +48,11 @@ export class DoctorService {
         id: id,
       },
       include: {
-        patients: true,
+        patients: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
   }
@@ -42,6 +62,15 @@ export class DoctorService {
       where: {
         doctorId: id,
       },
+    });
+  }
+
+  async updaeDoctorInfo(id: string, updateDoctor: Prisma.DoctorUpdateInput) {
+    return await this.databaseService.doctor.update({
+      where: {
+        id,
+      },
+      data: updateDoctor,
     });
   }
 }

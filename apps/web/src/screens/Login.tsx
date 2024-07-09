@@ -3,7 +3,6 @@ import { TypographyH1 } from "@/Typography/TypographyH1";
 import { TypographyP } from "@/Typography/TypographyP";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { z } from "zod";
@@ -20,8 +19,9 @@ import {
 } from "@/components/ui/form";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, setUser } from "@/features/user/userSlice";
+import BeatLoader from "react-spinners/BeatLoader";
 
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -35,6 +35,7 @@ const formSchema = z.object({
 const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,20 +49,24 @@ const Login = () => {
     mutate(values);
   }
 
-  const { data, mutate } = useMutation(
-    "login",
-
+  const { mutate, isLoading, error } = useMutation(
     async (data: { email: string; password: string }) => {
-      return await axios.post("http://localhost:4000/auth/login", data);
+      const response = await axios.post(
+        "http://localhost:4000/auth/login",
+        data
+      );
+      return response.data;
     },
     {
-      onSuccess: () => {
-        dispatch(setUser(data?.data));
+      onSuccess: (data) => {
+        if (data) {
+          dispatch(setUser(data));
+        }
       },
     }
   );
 
-  return user?.id ? (
+  return user?.user?.id ? (
     <Navigate to="/" />
   ) : (
     <div className="p-6 lg:p-0 h-[100vh] w-full bg-gray-100 mx-auto flex items-center justify-center ">
@@ -73,8 +78,9 @@ const Login = () => {
           <div>
             <TypographyH1>MediLink</TypographyH1>
             <TypographyP>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              in magnam explicabo
+              Log in to manage patient appointments, access medical records, and
+              collaborate with other healthcare professionals in a secure and
+              efficient environment.
             </TypographyP>
           </div>
 
@@ -119,7 +125,10 @@ const Login = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? <BeatLoader color="#36d7b7" size={10} /> : "Login"}
+              </Button>
             </form>
           </Form>
         </div>

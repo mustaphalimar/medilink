@@ -26,6 +26,7 @@ export class DoctorService {
       },
       include: {
         user: true,
+        patients: { select: { id: true } },
       },
     });
   }

@@ -21,6 +21,7 @@ export class AppointmentsService {
       where: {
         id,
       },
+      include: { doctor: true, Consultation: true, patient: true },
     });
   }
 
